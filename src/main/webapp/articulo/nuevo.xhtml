@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="../WEB-INF/layout.xhtml">
+    <ui:define name="header">
+    </ui:define>
+    <ui:define name="content">
+        <p:panel header="Ingresa los datos para guardar tu articulo">
+            <h:form enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="txtNombre">Nombre:</label>
+                    <p:inputText id="txtNombre" class="form-control" 
+                                 value="#{articuloBean.articuloNuevo.nombre}"
+                                 placeholder="Ingresa un nombre"></p:inputText>
+                </div>
+                <div class="form-group">
+                    <label for="txtDescripcion">Descripción:</label>
+                    <p:inputText id="txtDescripcion" class="form-control" 
+                                 value="#{articuloBean.articuloNuevo.descripcion}"
+                                 placeholder="Ingresa una descripcion"></p:inputText>
+                </div>
+                <div class="form-group">
+                    <p:outputLabel for="ddlCategoria" value="Categoria:"></p:outputLabel>
+                    <h:selectOneMenu id="ddlCategoria" class="form-control"
+                                     value="#{articuloBean.articuloNuevo.categoria}">
+                        <f:selectItem itemLabel="Seleccione una categoria" itemValue="0" />
+                        <f:selectItems value="#{articuloBean.categorias}" ></f:selectItems>
+                    </h:selectOneMenu>
+                </div>
+                <div class="form-group row">
+                    <label for="txtDesgaste" class="col-md-2">Desgaste:</label>
+                    <p:inputText class="col-md-2" id="txtDesgaste"
+                                 value="#{articuloBean.articuloNuevo.desgaste}" >
+                        <f:validateDoubleRange minimum="0" maximum="5" />
+                    </p:inputText>
+                    <p:slider class="col-md-6 offset-1" for="txtDesgaste" step="1" maxValue="5" />
+                </div>
+                <div class="form-group row">
+                    <label for="txtUso" class="col-md-2">Tiempo de uso:</label>
+                    <p:inputText class="col-md-2" id="txtUso" 
+                                 value="#{articuloBean.articuloNuevo.uso}">
+                        <f:validateDoubleRange minimum="0" maximum="5" />
+                    </p:inputText>
+                    <p:slider class="col-md-6 offset-1" for="txtUso" step="1" maxValue="5" />
+                </div>
+                <div class="form-group">
+                    <label for="ifFotos"> Foto </label>
+                    <h:inputFile class="form-control" id="ifFotos"
+                                 value="#{articuloBean.articuloNuevo.foto}"></h:inputFile>
+                </div>
+                <div class="form-group">
+                    <h:commandLink class="btn btn-lg btn-success btn-block"
+                                   action="#{articuloBean.registrarArticulo}"
+                                   value="Subir articulo"></h:commandLink>
+                </div>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

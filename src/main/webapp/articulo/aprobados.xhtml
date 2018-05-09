@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="../WEB-INF/layout.xhtml">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewAction action="#{clienteBean.obtenerArticulosAprobados()}" />
+        </f:metadata>
+    </ui:define>
+    <ui:define name="header">
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="form">
+            <p:dataTable var="articulo" value="#{clienteBean.articulosAprobados}"
+                     emptyMessage="Sin articulos registrados" rows="5"
+                     paginator="true"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}  {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15,20,50,100,300,500,1000,5000">
+            <f:facet name="header"> ARTICULOS REGISTRADOS </f:facet>
+
+            <p:column headerText="Fecha" sortBy="#{articulo.fechaRegistro}">
+                <h:outputText value="#{articulo.fechaRegistro}" >
+                    <f:convertDateTime pattern="dd/MMMM/yyyy" />
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="Nombre"
+                      filterBy="#{articulo.nombre}"
+                      filterMatchMode="contains"
+                      sortBy="#{articulo.nombre}">
+                <h:outputText value="#{articulo.nombre}" />
+            </p:column>
+            
+            <p:column headerText="Categoria">
+                <h:outputText value="#{articulo.categoriaNombre}" />
+            </p:column>
+            
+            <p:column style="width:55px;text-align: center">
+                <p:commandButton update=":form:detalleArticulo" oncomplete="PF('articuloDialog').show()" icon="ui-icon-search" title="Ver detalle">
+                    <f:setPropertyActionListener value="#{articulo}" target="#{clienteBean.articuloSeleccionado}" />
+                </p:commandButton>
+           </p:column>
+        </p:dataTable>
+            
+            <p:dialog header="Articulo seleccionado" widgetVar="articuloDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="detalleArticulo" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty clienteBean.articuloSeleccionado}" columnClasses="label,value">
+                        <f:facet name="header">
+                            <p:graphicImage value="#{clienteBean.articuloSeleccionado.fotoStream}" />
+                        </f:facet>
+                            
+                        <h:outputText value="Nombre:" />
+                        <h:outputText value="#{clienteBean.articuloSeleccionado.nombre}" />
+
+                        <h:outputText value="Descripción:" />
+                        <h:outputText value="#{clienteBean.articuloSeleccionado.descripcion}" />
+
+                        <h:outputText value="Categoria:" />
+                        <h:outputText value="#{clienteBean.articuloSeleccionado.categoriaNombre}" />
+
+                        <h:outputText value="Uso:" />
+                        <h:outputText value="#{clienteBean.articuloSeleccionado.uso}" />
+
+                        <h:outputText value="Desgaste:" />
+                        <h:outputText value="#{clienteBean.articuloSeleccionado.desgaste}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="../WEB-INF/layout.xhtml">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewAction action="#{intercambioBean.obtenerIntercambiosCliente()}" />
+        </f:metadata>
+    </ui:define>
+    <ui:define name="header">
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="form">
+            <p:dataTable var="articulo" value="#{intercambioBean.intercambiosEnProceso}"
+                     emptyMessage="Sin articulos registrados" rows="5"
+                     paginator="true"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}  {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15,20,50,100,300,500,1000,5000">
+                <f:facet name="header"> INTERCAMBIOS REGISTRADOS </f:facet>
+
+                <p:column headerText="Fecha" sortBy="#{articulo.fechaRegistro}">
+                    <h:outputText value="#{articulo.fechaRegistro}" >
+                        <f:convertDateTime pattern="dd/MMMM/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Nombre"
+                          filterBy="#{articulo.nombre}"
+                          filterMatchMode="contains"
+                          sortBy="#{articulo.nombre}">
+                    <h:outputText value="#{articulo.nombre}" />
+                </p:column>
+
+                <p:column headerText="Categoria">
+                    <h:outputText value="#{articulo.categoriaNombre}" />
+                </p:column>
+
+                <p:column style="width:55px;text-align: center">
+                    <p:commandButton update=":form:detalleArticulo" oncomplete="PF('articuloDialog').show()" icon="ui-icon-search" title="Ver detalle">
+                        <f:setPropertyActionListener value="#{articulo}" target="#{clienteBean.articuloSeleccionado}" />
+                    </p:commandButton>
+               </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>CAMBALACHING</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Language" content="es" />
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet"
+              href="#{facesContext.externalContext.requestContextPath}/css/bootstrap.min.css" />
+        
+        <ui:insert name="metadata"></ui:insert>
+        <ui:insert name="headStyles"></ui:insert>
+    </h:head>
+    <h:body>
+        <p:growl id="growl" showDetail="true" sticky="true" />
+        <h:form>
+        <p:menubar>
+            
+            <p:submenu label="Articulos" icon="ui-icon-tag">
+                <p:menuitem value="Nuevo articulo" url="/articulo/nuevo.xhtml" />
+                <p:menuitem value="Ver mis articulos" url="/articulo/aprobados.xhtml" />
+                <p:menuitem value="Ver articulos de otros" url="/articulo/intercambios.xhtml" />
+            </p:submenu>
+
+            <p:submenu label="Intercambio" icon="ui-icon-transferthick-e-w">
+                <p:menuitem value="Ver mis intercambios" url="#" />
+            </p:submenu>
+
+            <p:submenu label="Datos" icon="ui-icon-person">
+                <p:menuitem value="Mis datos" url="#" />
+            </p:submenu>
+            
+            <p:submenu label="Moderador" icon="ui-icon-key" rendered="#{clienteBean.cliente.moderador}">
+                <p:menuitem value="Aprobar articulos" url="/moderador/aprobar.xhtml" />
+            </p:submenu>
+
+            <f:facet name="options">
+                <p:commandLink type="button" class="btn" value="Cerrar sesión" action="#{userBean.cerrarSesion}"/>
+            </f:facet>
+        </p:menubar>
+        </h:form>
+        <!-- Page Content -->
+        <div class="container" style="margin-top: 80px;">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <ui:insert name="header">
+                        <div class="alert alert-dismissible alert-warning">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <h4>HEADER</h4>
+                            <p>NO SE HA DECLARADO ESTA SECCIÓN</p>
+                        </div>
+                    </ui:insert>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12 text-center" style="margin-bottom: 70px">
+                    <ui:insert name="content">
+                        <div class="alert alert-dismissible alert-warning">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <h4>CONTENT</h4>
+                            <p>NO SE HA DECLARADO ESTA SECCIÓN</p>
+                        </div>
+                    </ui:insert>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </h:body>
+</html>

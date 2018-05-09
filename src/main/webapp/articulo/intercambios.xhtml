@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="../WEB-INF/layout.xhtml">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewAction action="#{articuloBean.obtenerArticulosAprobados()}" />
+        </f:metadata>
+    </ui:define>
+    <ui:define name="header">
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="form">
+            <p:dataScroller value="#{articuloBean.articulosAprobados}" var="articulo" chunkSize="10">
+                <f:facet name="header">
+                    Articulos disponibles para intercambio
+                </f:facet>
+
+                <h:panelGrid columns="3" style="width:100%" columnClasses="foto,detalle,accion">
+                    <p:graphicImage name="/resources/articulos/#{articulo.cliente}/#{articulo.id}.png" />
+
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Nombre:" />
+                            <h:outputText value="#{articulo.nombre}" style="font-weight: bold"/>
+
+                            <h:outputText value="Descripcion:" />
+                            <h:outputText value="#{articulo.descripcion}" style="font-weight: bold"/>
+
+                            <h:outputText value="Fecha de publicación:" />
+                            <h:outputText value="#{articulo.fechaRegistro}" style="font-weight: bold">
+                                <f:convertDateTime pattern="dd/MMMM/yyyy" />
+                            </h:outputText>
+                        </h:panelGrid>
+                    </p:outputPanel>
+                    
+                    <p:outputPanel>
+                        <p:commandButton update=":form:detalleArticulo" oncomplete="PF('articuloDialog').show()" icon="ui-icon-search" title="Ver detalle">
+                            <f:setPropertyActionListener value="#{articulo}" target="#{intercambioBean.articuloSeleccionado}" />
+                        </p:commandButton>
+                    </p:outputPanel>
+                </h:panelGrid>
+            </p:dataScroller>
+            
+            <p:dialog header="Articulo seleccionado" widgetVar="articuloDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="detalleArticulo" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty intercambioBean.articuloSeleccionado}" columnClasses="label,value">
+                        <h:outputText value="Nombre:" />
+                        <h:outputText value="#{intercambioBean.articuloSeleccionado.nombre}" />
+
+                        <h:outputText value="Descripción:" />
+                        <h:outputText value="#{intercambioBean.articuloSeleccionado.descripcion}" />
+
+                        <h:outputText value="Categoria:" />
+                        <h:outputText value="#{intercambioBean.articuloSeleccionado.categoriaNombre}" />
+
+                        <h:outputText value="Uso:" />
+                        <h:outputText value="#{intercambioBean.articuloSeleccionado.uso}" />
+
+                        <h:outputText value="Desgaste:" />
+                        <h:outputText value="#{intercambioBean.articuloSeleccionado.desgaste}" />
+                    </p:panelGrid>
+                    <br/>
+                    <h:commandLink class="btn btn-success" action="#{intercambioBean.solicitarIntercambio}">Solicitar intercambio</h:commandLink>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

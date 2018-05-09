@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="../WEB-INF/layout.xhtml">
+    <ui:define name="metadata">
+    </ui:define>
+    <ui:define name="header">
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="form">
+            <p:dataTable var="articulo" value="#{moderadorBean.articulosPorAprobar}"
+                     emptyMessage="Sin articulos pendientes" rows="5"
+                     paginator="true"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}  {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15,20,50,100,300,500,1000,5000">
+            <f:facet name="header"> ARTICULOS POR APROBAR </f:facet>
+            <p:column headerText="Email Cliente" 
+                      filterBy="#{articulo.cliente_DTO.email}"
+                      filterMatchMode="contains"
+                      sortBy="#{articulo.cliente_DTO.email}">
+                <h:outputText value="#{articulo.cliente_DTO.email}" />
+            </p:column>
+
+            <p:column headerText="Fecha" sortBy="#{articulo.fechaRegistro}">
+                <h:outputText value="#{articulo.fechaRegistro}" >
+                    <f:convertDateTime pattern="dd/MMMM/yyyy" />
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="Nombre"
+                      filterBy="#{articulo.nombre}"
+                      filterMatchMode="contains"
+                      sortBy="#{articulo.nombre}">
+                <h:outputText value="#{articulo.nombre}" />
+            </p:column>
+            
+            <p:column headerText="Categoria">
+                <h:outputText value="#{articulo.categoriaNombre}" />
+            </p:column>
+            
+            <p:column style="width:55px;text-align: center">
+                <p:commandButton update=":form:detalleArticulo" oncomplete="PF('articuloDialog').show()" icon="ui-icon-search" title="Ver detalle">
+                    <f:setPropertyActionListener value="#{articulo}" target="#{moderadorBean.articuloSeleccionado}" />
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+            
+            <p:dialog header="Articulo seleccionado" widgetVar="articuloDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="detalleArticulo" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty moderadorBean.articuloSeleccionado}" columnClasses="label,value">
+                        <h:outputText value="Nombre:" />
+                        <h:outputText value="#{moderadorBean.articuloSeleccionado.nombre}" />
+
+                        <h:outputText value="Descripción:" />
+                        <h:outputText value="#{moderadorBean.articuloSeleccionado.descripcion}" />
+
+                        <h:outputText value="Categoria:" />
+                        <h:outputText value="#{moderadorBean.articuloSeleccionado.categoriaNombre}" />
+
+                        <h:outputText value="Uso:" />
+                        <h:outputText value="#{moderadorBean.articuloSeleccionado.uso}" />
+
+                        <h:outputText value="Desgaste:" />
+                        <h:outputText value="#{moderadorBean.articuloSeleccionado.desgaste}" />
+                    </p:panelGrid>
+                    <br/>
+                    <h:commandLink class="btn btn-success" action="#{moderadorBean.aprobarArticulo}">Aprobar articulo</h:commandLink>
+                    <h:commandLink class="btn btn-danger" action="#{moderadorBean.eliminarArticulo}">Eliminar articulo</h:commandLink>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

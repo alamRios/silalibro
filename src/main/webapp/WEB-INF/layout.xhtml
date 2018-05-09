@@ -36,12 +36,12 @@
                 <p:menuitem value="Mis datos" url="#" />
             </p:submenu>
             
-            <p:submenu label="Moderador" icon="ui-icon-key" rendered="#{clienteBean.cliente.moderador}">
+            <p:submenu label="Moderador" icon="ui-icon-key" >
                 <p:menuitem value="Aprobar articulos" url="/moderador/aprobar.xhtml" />
             </p:submenu>
 
             <f:facet name="options">
-                <p:commandLink type="button" class="btn" value="Cerrar sesión" action="#{userBean.cerrarSesion}"/>
+                <p:commandLink type="button" class="btn" value="Cerrar sesión"/>
             </f:facet>
         </p:menubar>
         </h:form>

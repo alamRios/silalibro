@@ -1,10 +1,10 @@
 /*
  * CPC SISTEMAS
  */
-package com.cambalaching.web.bean;
+package com.silalibro.web.bean;
 
-import com.cambalaching.model.dao.impl.jdbc.ArticuloDAOImplJDBC;
-import com.cambalaching.model.dto.ArticuloDTO;
+import com.silalibro.model.dao.impl.jdbc.ArticuloDAOImplJDBC;
+import com.silalibro.model.dto.ArticuloDTO;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;

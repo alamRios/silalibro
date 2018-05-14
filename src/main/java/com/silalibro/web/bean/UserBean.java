@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cambalaching.web.bean;
+package com.silalibro.web.bean;
 
-import com.cambalaching.model.dao.impl.jdbc.CiudadDAOImplJDBC;
-import com.cambalaching.model.dao.impl.jdbc.UserDAOImplJDBC;
-import com.cambalaching.model.dto.ClienteDTO;
+import com.silalibro.model.dao.impl.jdbc.CiudadDAOImplJDBC;
+import com.silalibro.model.dao.impl.jdbc.UserDAOImplJDBC;
+import com.silalibro.model.dto.ClienteDTO;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -36,6 +36,9 @@ public class UserBean {
     private ClienteDTO clienteNuevo; 
     private String pass; 
     
+    /* GLOBAL VARIABLES */
+    private String mensaje; 
+    
     public UserBean(){
     }
     
@@ -43,6 +46,8 @@ public class UserBean {
     public void setup()  {
         userDAO_ = new UserDAOImplJDBC(); 
         ciudadDAO_ = new CiudadDAOImplJDBC(); 
+        
+        mensaje = "Bienvenido a Silalibro"; 
         
         user_email = ""; 
         user_pass = ""; 
@@ -150,6 +155,14 @@ public class UserBean {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
     
     

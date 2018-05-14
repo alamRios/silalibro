@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cambalaching.model.dao.impl.jdbc;
+package com.silalibro.model.dao.impl.jdbc;
 
-import com.cambalaching.model.dao.UserDAO;
-import com.cambalaching.model.dto.ClienteDTO;
+import com.silalibro.model.dao.UserDAO;
+import com.silalibro.model.dto.ClienteDTO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

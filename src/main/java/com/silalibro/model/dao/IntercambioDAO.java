@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cambalaching.model.dao;
+package com.silalibro.model.dao;
 
-import com.cambalaching.model.dto.ArticuloDTO;
-import com.cambalaching.model.dto.IntercambioDTO;
+import com.silalibro.model.dto.ArticuloDTO;
+import com.silalibro.model.dto.IntercambioDTO;
 import java.util.List;
 
 /**

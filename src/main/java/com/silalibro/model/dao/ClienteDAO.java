@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cambalaching.model.dao;
+package com.silalibro.model.dao;
 
-import java.util.List;
-import javax.faces.model.SelectItem;
+import com.silalibro.model.dto.ClienteDTO;
 
 /**
  *
  * @author ariosa1500
  */
-public interface CiudadDAO {
-    public List<SelectItem> obtenerCiudades_DDL() throws Exception; 
+public interface ClienteDAO {
+    public ClienteDTO obtenerClientePorId(int idcliente) throws Exception; 
 }

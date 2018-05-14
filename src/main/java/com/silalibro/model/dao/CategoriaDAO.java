@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cambalaching.model.dao;
+package com.silalibro.model.dao;
 
 import java.util.List;
 import javax.faces.model.SelectItem;

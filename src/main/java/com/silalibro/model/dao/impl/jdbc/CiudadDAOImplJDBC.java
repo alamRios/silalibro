@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cambalaching.model.dao.impl.jdbc;
+package com.silalibro.model.dao.impl.jdbc;
 
-import com.cambalaching.model.dao.CategoriaDAO;
+import com.silalibro.model.dao.CiudadDAO;
+import com.silalibro.model.dto.ClienteDTO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,12 +19,11 @@ import javax.faces.model.SelectItem;
  *
  * @author ariosa1500
  */
-public class CategoriaDAOImplJDBC implements CategoriaDAO{
-
-    private String SQL_OBTENER_CATEGORIA_DDL = "select idinteres, interes_nombre from interes where interes_activo_bo = 1 "; 
+public class CiudadDAOImplJDBC implements CiudadDAO{
+    private String SQL_OBTENER_CIUDADES_DDL = "select idciudad, ciudad_nombre from ciudad where ciudad_activa_bo = 1"; 
     
     @Override
-    public List<SelectItem> obtenerCategorias_DDL() throws Exception {
+    public List<SelectItem> obtenerCiudades_DDL() throws Exception {
         Connection conn = null; 
         PreparedStatement st = null; 
         ResultSet rs = null; 
@@ -34,13 +34,13 @@ public class CategoriaDAOImplJDBC implements CategoriaDAO{
             Class.forName(driver);
             conn = DriverManager.getConnection(dburl, "root", "");
 
-            st = conn.prepareStatement(SQL_OBTENER_CATEGORIA_DDL);
+            st = conn.prepareStatement(SQL_OBTENER_CIUDADES_DDL);
 
             rs = st.executeQuery();
             while(rs.next()){
                 SelectItem si = new SelectItem(); 
-                si.setLabel(rs.getString("interes_nombre"));
-                si.setValue(rs.getInt("idinteres"));
+                si.setLabel(rs.getString("ciudad_nombre"));
+                si.setValue(rs.getInt("idciudad"));
                 list.add(si);
             }
             return list; 

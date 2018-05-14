@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cambalaching.model.dao;
+package com.silalibro.model.dao;
 
-import com.cambalaching.model.dto.ClienteDTO;
+import com.silalibro.model.dto.ClienteDTO;
 
 /**
  *

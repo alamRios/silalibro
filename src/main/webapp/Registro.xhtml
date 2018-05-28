@@ -1,0 +1,149 @@
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>SILALIBRO</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Language" content="es" />
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="css/colors.css"/>
+        <link rel="shortcut icon" type="image/ico" href="#{facesContext.externalContext.requestContextPath}/favicon.ico"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous" />
+        <link rel="stylesheet"
+              href="#{facesContext.externalContext.requestContextPath}/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.xhtml">
+                <h:graphicImage width="200" value="images/SilalibroLogo_blanco.png" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Cultura</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Economía</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Matemáticas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Arte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ciencia y tecnología</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Investigación</a>
+                    </li>
+                    <li class="nav-item">
+                        <input type="text" class="form-control" placeholder="Buscar libro, autor, genero..." size="25"/>
+                    </li>
+                </ul>
+                <ul class="my-2 my-lg-0 ">
+                    <a href="#" class="btn btn-outline-primary float-right">Iniciar sesión <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                    <br />
+                    <br />
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <br/>
+            <h1 class="text-center">Registrate a Silalibro</h1>
+            <br/>
+            <h:form>
+                <div class="row bg-registro">
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <h3 class="text-center">Datos de la cuenta</h3>
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Nombre:" class="control-label col-sm-2" for="nombre"/>
+                            <h:inputText id="nombre" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                            <h:message for="nombre"/>
+                        </div>
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Apellido:" class="control-label col-sm-2" for="apellido"/>
+                            <h:inputText id="apellido" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                            <h:message for="apellido"/>
+                        </div>
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Email:" class="control-label col-sm-2" for="email"/>
+                            <h:inputText id="email" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                            <h:message for="email"/>
+                        </div>
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Contraseña:" class="control-label col-sm-2" for="contraseña"/>
+                            <h:inputSecret id="contraseña" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                            <h:message for="contraseña"/>
+                        </div>
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Confirmar contraseña:" class="control-label col-sm-2" for="confcontra"/>
+                            <h:inputSecret id="confcontra" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                            <h:message for="confcontra"/>
+                        </div>
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Año de nacimiento:" class="control-label col-sm-2" for="añonac"/>
+                            <h:inputSecret id="añonac" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                            <h:message for="añonac"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <h3 class="text-center">Datos de contacto</h3>
+                        <div class="form-group form-inline col-sm-12 col-md-12">
+                            <h:outputLabel value="Calle:" class="control-label col-sm-4" for="calle"/>
+                            <h:inputText id="calle" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                            <h:message for="calle"/>
+                        </div>
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Número exterior:" class="control-label col-sm-4" for="numext"/>
+                            <h:inputSecret id="numext" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                            <h:message for="numext"/>
+                        </div>
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Número interior:" class="control-label col-sm-4" for="numint"/>
+                            <h:inputSecret id="numint" class="form-control col-sm-7 offset-sm-1"/>
+                        </div>
+
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Código postal:" class="control-label col-sm-4" for="postal"/>
+                            <h:inputSecret id="postal" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                            <h:message for="postal"/>
+                        </div>
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Colonia:" class="control-label col-sm-4" for="colonia"/>
+                            <h:inputSecret id="colonia" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                            <h:message for="colonia"/>
+                        </div>
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Municipio/Alcaldía:" class="control-label col-sm-4" for="municipio"/>
+                            <h:inputSecret id="municipio" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                            <h:message for="municipio"/>
+                        </div>
+                        <div class="form-group form-inline col-md-12">
+                            <h:outputLabel value="Estado:" class="control-label col-sm-4" for="estado"/>
+                            <h:inputSecret id="estado" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                            <h:message for="estado"/>
+                        </div>
+                    </div>
+                    <div class="clearfix visible-md-block"></div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-3 offset-sm-5 col-xs-3 offset-xs-5">
+                        <h:commandButton value="Registrarme" class="btn btn-info offset-1"/>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </body>
+</html>

@@ -4,15 +4,33 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 template="../WEB-INF/layout.xhtml">
+    <ui:define name="headStyles">
+        <link rel="stylesheet" href="../css/colors.css"/>
+    </ui:define>
+    
+    <ui:define name="logo">
+        <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
+    </ui:define>
+
     <ui:define name="header">
     </ui:define>
+
+    <ui:define name="login">
+        <ul class="my-2 my-lg-0 ">
+            <a href="#" class="btn btn-outline-primary float-right">Ver mi cuenta <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+            <br />
+            <br />
+            <h:commandButton value="Cerrar sesión" class="btn btn-outline-danger float-right"/>
+        </ul>
+    </ui:define>
+
     <ui:define name="content">
         <div>
-            
+
         </div>
         <div class="card">
             <div class="card-header">
-                <h:graphicImage width="500" value="images/SilalibroLogo.png" class="d-block mx-auto"/>
+                <h:graphicImage width="500" value="../images/SilalibroLogo.png" class="d-block mx-auto"/>
             </div>
             <div class="card-body">
                 #{userBean.mensaje}

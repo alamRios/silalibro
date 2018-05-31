@@ -5,6 +5,8 @@
  */
 package com.silalibro.web.bean;
 
+import com.silalibro.dao.UsuarioDAO;
+import com.silalibro.dto.Usuario;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.annotation.PostConstruct;
@@ -17,8 +19,15 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class UserBean {
+    /* DAO */
+    private UsuarioDAO usuarioDAO_; 
+    
     /* GLOBAL VARIABLES */
     private String mensaje; 
+    
+    /* LOGIN VARIABLES */
+    private String correo_usr;
+    private String passwd_usr;
     
     public UserBean(){
     }
@@ -39,6 +48,17 @@ public class UserBean {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
+    
+    public void iniciarSesion(){
+        try{
+            Usuario usuario = usuarioDAO_.iniciarSesion(correo_usr,passwd_usr); 
+        }catch(Exception ex){
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, 
+                    "Ha ocurrido un error",
+                    ex.toString());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
 
     public String getMensaje() {
         return mensaje;
@@ -47,4 +67,22 @@ public class UserBean {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
+    public String getCorreo_usr() {
+        return correo_usr;
+    }
+
+    public void setCorreo_usr(String correo_usr) {
+        this.correo_usr = correo_usr;
+    }
+
+    public String getPasswd_usr() {
+        return passwd_usr;
+    }
+
+    public void setPasswd_usr(String passwd_usr) {
+        this.passwd_usr = passwd_usr;
+    }
+    
+    
 }

@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="../WEB-INF/layout.xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:define name="header">
+    </ui:define>
+    <ui:define name="logo">
+        <ui:fragment rendered="#{!userBean.usuario.administrador}">
+            <a class="navbar-brand" 
+               href="#{facesContext.externalContext.requestContextPath}/index.xhtml">
+                <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
+            </a>
+        </ui:fragment>
+        <ui:fragment rendered="#{userBean.usuario.administrador}">
+            <a class="navbar-brand" 
+               href="#{facesContext.externalContext.requestContextPath}/administrador/index.xhtml">
+                <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
+            </a>
+        </ui:fragment>
+    </ui:define>
+    <ui:define name="uilogin">
+        <br />
+        <br />
+        <h:commandButton value="Cerrar sesión" class="btn btn-outline-danger float-right" action="#{userBean.cerrarSesion}"/>
+    </ui:define>
+    <ui:define name="content">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Mi cuenta</li>
+            </ol>
+        </nav>
+    </ui:define>
+</ui:composition>

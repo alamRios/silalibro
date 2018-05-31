@@ -10,11 +10,10 @@ import com.silalibro.dto.UsuarioDTO;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import org.springframework.beans.factory.annotation.Autowired;
 /**
  *
  * @author ariosa1500
@@ -65,7 +64,7 @@ public class UserBean implements Serializable{
                 ExternalContext context; 
                 if(usuario.isAdministrador()){
                     context = FacesContext.getCurrentInstance().getExternalContext();
-                    context.getFlash().setKeepMessages(true);;
+                    context.getFlash().setKeepMessages(true);
                     context.redirect(context.getRequestContextPath() + "/administrador/index.xhtml");
                 }
             }else{

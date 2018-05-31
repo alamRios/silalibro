@@ -31,6 +31,7 @@ public class UsuarioDAO {
             rs = st.executeQuery(); 
             if(rs.next()){
                 usuario = new UsuarioDTO(); 
+                usuario.setIdusuario(rs.getInt("idusuario"));
                 usuario.setEmail(rs.getString("usuario_email"));
                 usuario.setNombre(rs.getString("usuario_nombre"));
                 usuario.setApellidoPaterno(rs.getString("usuario_apellidoPaterno"));

@@ -9,16 +9,12 @@
     </ui:define>
     
     <ui:define name="logo">
-        <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
+        <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/administrador/index.xhtml">
+            <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
+        </a>
     </ui:define>
 
     <ui:define name="header">
-    </ui:define>
-
-    <ui:define name="uilogin">
-        <br />
-        <br />
-        <h:commandButton value="Cerrar sesión" class="btn btn-outline-danger float-right" action="#{userBean.cerrarSesion}"/>
     </ui:define>
 
     <ui:define name="content">

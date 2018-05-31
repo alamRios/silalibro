@@ -7,6 +7,8 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:define name="header">
     </ui:define>
+    <ui:define name="jquery">
+    </ui:define>
     <ui:define name="logo">
         <ui:fragment rendered="#{!userBean.usuario.administrador}">
             <a class="navbar-brand" 
@@ -32,5 +34,84 @@
                 <li class="breadcrumb-item active" aria-current="page">Mi cuenta</li>
             </ol>
         </nav>
+        <h:form>
+            <div class="row bg-registro">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <h3 class="text-center my-3">Datos de la cuenta</h3>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Nombre:" class="control-label col-sm-2" for="nombre"/>
+                        <h:inputText id="nombre" class="form-control col-sm-9 offset-sm-1" 
+                                     value="#{userBean.usuario.nombre}" required="true"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Apellido:" class="control-label col-sm-2" for="apellido"/>
+                        <h:inputText id="apellido" class="form-control col-sm-9 offset-sm-1" 
+                                     value="#{userBean.usuario.apellidoPaterno} #{userBean.usuario.apellidoMaterno}" required="true"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Email:" class="control-label col-sm-2" for="email"/>
+                        <h:inputText id="email" class="form-control col-sm-9 offset-sm-1" 
+                                     value="#{userBean.usuario.email}" required="true"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Contraseña:" class="control-label col-sm-2" for="contraseña"/>
+                        <h:inputSecret id="contraseña" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Confirmar contraseña:" class="control-label col-sm-2" for="confcontra"/>
+                        <h:inputSecret id="confcontra" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel class="control-label col-sm-2" for="txtFechaNac" value="Fecha Nacimiento:" />
+                        <p:calendar class="form-control col-sm-9 offset-sm-1" id="txtFechaNac" />
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <h3 class="text-center my-3">Datos de contacto</h3>
+                    <div class="form-group form-inline col-sm-12 col-md-12">
+                        <h:outputLabel value="Calle:" class="control-label col-sm-4" for="calle"/>
+                        <h:inputText id="calle" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:message for="calle"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Número exterior:" class="control-label col-sm-4" for="numext"/>
+                        <h:inputText id="numext" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:message for="numext"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Número interior:" class="control-label col-sm-4" for="numint"/>
+                        <h:inputText id="numint" class="form-control col-sm-7 offset-sm-1"/>
+                    </div>
+
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Código postal:" class="control-label col-sm-4" for="postal"/>
+                        <h:inputText id="postal" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:message for="postal"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Colonia:" class="control-label col-sm-4" for="colonia"/>
+                        <h:inputText id="colonia" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:message for="colonia"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Municipio/Alcaldía:" class="control-label col-sm-4" for="municipio"/>
+                        <h:inputText id="municipio" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:message for="municipio"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Estado:" class="control-label col-sm-4" for="estado"/>
+                        <h:inputText id="estado" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:message for="estado"/>
+                    </div>
+                </div>
+                <div class="clearfix visible-md-block"></div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="mx-auto">
+                    <h:commandButton value="Guardar" class="btn btn-info"/>
+                </div>
+            </div>
+        </h:form>
     </ui:define>
 </ui:composition>

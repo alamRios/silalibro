@@ -67,7 +67,6 @@ public class UserBean {
                     context.redirect(context.getRequestContextPath() + "/administrador/index.xhtml");
                 }
             }else{
-                System.out.println("credenciales incorrectas"); 
                 credencialesIncorrectas = true; 
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, 
                     "Ha ocurrido un error",

@@ -11,20 +11,32 @@ package com.silalibro.dto;
  */
 public class UsuarioDTO {
     private int idusuario; 
-    private String nombreUsuario;
+    private String nombre;
+    private String apellidoPaterno; 
+    private String apellidoMaterno;
+    private String email; 
     private boolean administrador; 
     
+    public UsuarioDTO(){
+        this.idusuario = 0; 
+        this.nombre = ""; 
+        this.apellidoPaterno = ""; 
+        this.apellidoMaterno = ""; 
+        this.email = ""; 
+        this.administrador = false;
+    }
+    
     public UsuarioDTO(String nombreUsuario, boolean administrador){
-        this.nombreUsuario = nombreUsuario; 
+        this.nombre = nombreUsuario; 
         this.administrador = administrador; 
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public boolean isAdministrador() {
@@ -41,5 +53,29 @@ public class UsuarioDTO {
 
     public void setIdusuario(int idusuario) {
         this.idusuario = idusuario;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

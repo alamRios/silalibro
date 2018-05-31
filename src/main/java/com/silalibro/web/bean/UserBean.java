@@ -6,11 +6,12 @@
 package com.silalibro.web.bean;
 
 import com.silalibro.dao.UsuarioDAO;
-import com.silalibro.dto.Usuario;
+import com.silalibro.dto.UsuarioDTO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 /**
  *
@@ -24,10 +25,12 @@ public class UserBean {
     
     /* GLOBAL VARIABLES */
     private String mensaje; 
+    private UsuarioDTO usuario; 
     
     /* LOGIN VARIABLES */
     private String correo_usr;
     private String passwd_usr;
+    private boolean credencialesIncorrectas; 
     
     public UserBean(){
     }
@@ -35,6 +38,8 @@ public class UserBean {
     @PostConstruct
     public void setup()  {
         mensaje = "Bienvenido a Silalibro"; 
+        credencialesIncorrectas = false; 
+        usuarioDAO_ = new UsuarioDAO(); 
     }
         
     public void cerrarSesion(){
@@ -51,8 +56,26 @@ public class UserBean {
     
     public void iniciarSesion(){
         try{
-            Usuario usuario = usuarioDAO_.iniciarSesion(correo_usr,passwd_usr); 
+            usuario = usuarioDAO_.iniciarSesion(correo_usr,passwd_usr); 
+            if(usuario != null){
+                FacesContext.getCurrentInstance()
+                        .getExternalContext().getSessionMap().put("idusuario", usuario.getIdusuario());
+                ExternalContext context; 
+                if(usuario.isAdministrador()){
+                    context = FacesContext.getCurrentInstance().getExternalContext();
+                    context.getFlash().setKeepMessages(true);;
+                    context.redirect(context.getRequestContextPath() + "/administrador/index.xhtml");
+                }
+            }else{
+                System.out.println("credenciales incorrectas"); 
+                credencialesIncorrectas = true; 
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, 
+                    "Ha ocurrido un error",
+                    "Credenciales incorrectas");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
         }catch(Exception ex){
+            ex.printStackTrace();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, 
                     "Ha ocurrido un error",
                     ex.toString());
@@ -82,6 +105,22 @@ public class UserBean {
 
     public void setPasswd_usr(String passwd_usr) {
         this.passwd_usr = passwd_usr;
+    }
+
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
+    }
+
+    public boolean isCredencialesIncorrectas() {
+        return credencialesIncorrectas;
+    }
+
+    public void setCredencialesIncorrectas(boolean credencialesIncorrectas) {
+        this.credencialesIncorrectas = credencialesIncorrectas;
     }
     
     

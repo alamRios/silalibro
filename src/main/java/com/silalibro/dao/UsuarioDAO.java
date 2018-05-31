@@ -5,7 +5,7 @@
  */
 package com.silalibro.dao;
 
-import com.silalibro.dto.Usuario;
+import com.silalibro.dto.UsuarioDTO;
 
 /**
  *
@@ -13,8 +13,9 @@ import com.silalibro.dto.Usuario;
  */
 public class UsuarioDAO {
     
-    public Usuario iniciarSesion(String correo, String contra){
-        Usuario usuario = new Usuario(); 
+    public UsuarioDTO iniciarSesion(String correo, String contra){
+        UsuarioDTO usuario = null; 
+        usuario = new UsuarioDTO("AlamRios",true);
         return usuario; 
     }
 }

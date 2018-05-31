@@ -24,7 +24,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.xhtml">
+            <a class="navbar-brand" href="#">
                 <ui:insert name="logo">
                     <h:graphicImage width="200" value="images/SilalibroLogo_blanco.png" />
                 </ui:insert>
@@ -51,21 +51,28 @@
                         <a class="nav-link" href="#">Ciencia y tecnología</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Investigación</a>
-                    </li>
-                    <li class="nav-item">
                         <input type="text" class="form-control" placeholder="Buscar libro, autor, genero..." size="25"/>
                     </li>
                 </ul>
                 <h:form id="formLogin">
-                <ui:insert name="login">
-                    <ul class="my-2 my-lg-0 ">
-                        <a data-target="#modalIniciarSesion" data-toggle="modal" class="btn btn-outline-primary float-right text-light">Iniciar sesión <i class="fa fa-user-circle" aria-hidden="true"></i></a>
-                        <br />
-                        <br />
-                        <a class="text-light" href="Registro.xhtml">¿Aún no tienes cuenta? <div class="btn btn-primary btn-sm">¡Registrate!</div></a>
-                    </ul>
-                </ui:insert>
+                    <ui:insert name="uilogin">
+                        <ui:fragment rendered="#{userBean.usuario == null}">
+                            <ul class="my-2 my-lg-0 ">
+                                <a data-target="#modalIniciarSesion" data-toggle="modal" class="btn btn-outline-primary float-right text-light">Iniciar sesión <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                                <br />
+                                <br />
+                                <a class="text-light" href="Registro.xhtml">¿Aún no tienes cuenta? <div class="btn btn-primary btn-sm">¡Registrate!</div></a>
+                            </ul>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{userBean.usuario != null}">
+                            <ul class="my-2 my-lg-0 ">
+                                <a href="#" class="btn btn-outline-primary float-right">Ver mi cuenta <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                                <br />
+                                <br />
+                                <h:commandButton value="Cerrar sesión" class="btn btn-outline-danger float-right" action="#{userBean.cerrarSesion}"/>
+                            </ul>
+                        </ui:fragment>
+                    </ui:insert>
                 </h:form>
             </div>
         </nav>

@@ -7,19 +7,21 @@ package com.silalibro.web.bean;
 
 import com.silalibro.dao.UsuarioDAO;
 import com.silalibro.dto.UsuarioDTO;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import org.springframework.beans.factory.annotation.Autowired;
 /**
  *
  * @author ariosa1500
  */
 @ManagedBean
-@ViewScoped
-public class UserBean {
+@SessionScoped
+public class UserBean implements Serializable{
     /* DAO */
     private UsuarioDAO usuarioDAO_; 
     

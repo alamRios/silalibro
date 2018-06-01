@@ -3,17 +3,120 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                template="WEB-INF/layout.xhtml">
+                template="WEB-INF/layout.xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:define name="header">
     </ui:define>
     <ui:define name="content">
-        <div class="card">
-            <div class="card-header">
-                <h:graphicImage width="500" value="images/SilalibroLogo.png" class="d-block mx-auto"/>
+        <ui:fragment rendered="#{userBean.credencialesIncorrectas}">
+            <div class="col-3 float-right">
+                <div class="alert alert-danger" role="alert">
+                    Credenciales incorrectas
+                </div>
             </div>
-            <div class="card-body">
-                #{userBean.mensaje}
+        </ui:fragment>
+        
+        <div class="modal fade" tabindex="-1" role="dialog" 
+         aria-labelledby="modalIniciarSesion" id="modalIniciarSesion">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Iniciar sesión</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h:form id="formInicioSesion">
+                        <div class="container">
+                            <ui:fragment rendered="#{userBean.credencialesIncorrectas}">
+                                <div class="alert alert-danger" role="alert">
+                                    Credenciales incorrectas
+                                </div>
+                            </ui:fragment>
+                            <div class="form-group">
+                                <label for="txtCorreo">Correo:</label>
+                                <h:inputText id="txtCorreo" value="#{userBean.correo_usr}" 
+                                             class="form-control"/>
+                            </div>
+                            <div>
+                                <label for="txtContrasena">Contraseña</label>
+                                <h:inputSecret id="txtContrasena" value="#{userBean.passwd_usr}" 
+                                             class="form-control"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="float-right">
+                            <h:commandButton class="btn btn-success" 
+                                             action="#{userBean.iniciarSesion}" value="Iniciar sesión">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                </div>
+                <div class="modal-footer">
+                </div>
             </div>
         </div>
+    </div> <div class="row text-center">
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+              <img class="card-img-top" src="https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-1-495x750.jpg" alt=""></img>
+            <div class="card-body">
+              <h4 class="card-title">Titulo del libro</h4>
+              <p class="card-text">Descripción</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary">Rentar</a>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-20-498x750.jpg" alt=""></img>
+            <div class="card-body">
+              <h4 class="card-title">Titulo del libro</h4>
+              <p class="card-text">Descripción</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary">Rentar</a>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-13.jpg" alt=""></img>
+            <div class="card-body">
+              <h4 class="card-title">Titulo del libro</h4>
+              <p class="card-text">Descripción</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary">Rentar</a>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-25.jpg" alt=""></img>
+            <div class="card-body">
+              <h4 class="card-title">Titulo del libro</h4>
+              <p class="card-text">Descripción</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary">Rentar</a>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+
     </ui:define>
 </ui:composition>

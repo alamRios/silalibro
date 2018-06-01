@@ -12,3 +12,10 @@ and open the template in the editor.
 	background: #E8EED8;
 	border-radius: 10px;
 }
+
+.bg-footer{
+	background: #868686;
+	color: #F6FCFF;
+	font-family: Century Gothic;
+	font-size: 11px;
+}

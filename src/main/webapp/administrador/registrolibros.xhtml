@@ -15,25 +15,19 @@
                     <h3 class="text-center my-3">Datos del libro</h3>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="SKU:" class="control-label col-sm-2" for="SKU"/>
-                        <h:inputText id="SKU" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                        <h:inputText id="SKU" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.sku}" required="true"/>
                         <h:message for="SKU"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="TITULO:" class="control-label col-sm-2" for="TITULO"/>
-                        <h:inputText id="TITULO" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                        <h:inputText id="TITULO" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.titulo}" required="true"/>
                         <h:message for="TITULO"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="idautor:" class="control-label col-sm-2" for="idautor"/>
                         <h:inputText id="idautor" class="form-control col-sm-9 offset-sm-1" required="true"/>
                         <h:message for="idautor"/>
-                    </div>
-                    <div class="form-group form-inline col-md-12">
-                        <h:outputLabel value="librocol:" class="control-label col-sm-2" for="librocol"/>
-                        <h:inputSecret id="librocol" class="form-control col-sm-9 offset-sm-1" required="true"/>
-                        <h:message for="librocol"/>
-                    </div>
-                    
+                    </div>   
                 </div>
                 
                 </div>
@@ -42,7 +36,7 @@
             <br/>
             <div class="row">
                 <h:commandLink class="btn btn-lg btn-success btn-block"
-                                   action="#{libroBean.registrarArticulo}"
+                                   action="#{libroBean.registrarLibro}"
                                    value="Subir articulo"></h:commandLink>
             </div>
         </h:form>

@@ -11,7 +11,7 @@ public class LibroDTO {
     private int idlibro; 
     private String titulo;
     private String sku; 
-    private String idautor;
+    private int idautor;
     private String librocol ; 
     
     public LibroDTO(){
@@ -49,11 +49,11 @@ public class LibroDTO {
         this.sku = sku;
     }
 
-    public String getIdautor() {
+    public Integer getIdautor() {
         return idautor;
     }
 
-    public void setIdautor(String idautor) {
+    public void setIdautor(int idautor) {
         this.idautor = idautor;
     }
 

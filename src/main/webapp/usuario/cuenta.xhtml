@@ -29,6 +29,12 @@
         <h:commandButton value="Cerrar sesión" class="btn btn-outline-danger float-right" action="#{userBean.cerrarSesion}"/>
     </ui:define>
     <ui:define name="content">
+        <div class="row">
+            <div class="col">
+                <a class="float-sm-right btn btn-outline-info" href="movimientos.xhtml"> Movimientos de saldo <i class="fa fa-usd" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <br/>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">Mi cuenta</li>
@@ -63,45 +69,47 @@
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel class="control-label col-sm-2" for="txtFechaNac" value="Fecha Nacimiento:" />
-                        <p:calendar class="form-control col-sm-9 offset-sm-1" id="txtFechaNac" />
+                        <p:calendar class="form-control col-sm-9 offset-sm-1" 
+                                    id="txtFechaNac" value="#{userBean.usuario.fechaNacimiento}"/>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <h3 class="text-center my-3">Datos de contacto</h3>
                     <div class="form-group form-inline col-sm-12 col-md-12">
                         <h:outputLabel value="Calle:" class="control-label col-sm-4" for="calle"/>
-                        <h:inputText id="calle" class="form-control col-sm-7 offset-sm-1" required="true"/>
-                        <h:message for="calle"/>
+                        <h:inputText id="calle" class="form-control col-sm-7 offset-sm-1" 
+                                     value="#{userBean.usuario.direccion.calle}" required="true"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Número exterior:" class="control-label col-sm-4" for="numext"/>
-                        <h:inputText id="numext" class="form-control col-sm-7 offset-sm-1" required="true"/>
-                        <h:message for="numext"/>
+                        <h:inputText id="numext" class="form-control col-sm-7 offset-sm-1" 
+                                     value="#{userBean.usuario.direccion.numeroExterior}" required="true"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Número interior:" class="control-label col-sm-4" for="numint"/>
-                        <h:inputText id="numint" class="form-control col-sm-7 offset-sm-1"/>
+                        <h:inputText id="numint" class="form-control col-sm-7 offset-sm-1"
+                                     value="#{userBean.usuario.direccion.numeroInterior}"/>
                     </div>
 
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Código postal:" class="control-label col-sm-4" for="postal"/>
-                        <h:inputText id="postal" class="form-control col-sm-7 offset-sm-1" required="true"/>
-                        <h:message for="postal"/>
+                        <h:inputText id="postal" class="form-control col-sm-7 offset-sm-1" 
+                                     value="#{userBean.usuario.direccion.CP}" required="true"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Colonia:" class="control-label col-sm-4" for="colonia"/>
-                        <h:inputText id="colonia" class="form-control col-sm-7 offset-sm-1" required="true"/>
-                        <h:message for="colonia"/>
+                        <h:inputText id="colonia" class="form-control col-sm-7 offset-sm-1" 
+                                     value="#{userBean.usuario.direccion.colonia}" required="true"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Municipio/Alcaldía:" class="control-label col-sm-4" for="municipio"/>
-                        <h:inputText id="municipio" class="form-control col-sm-7 offset-sm-1" required="true"/>
-                        <h:message for="municipio"/>
+                        <h:inputText id="municipio" class="form-control col-sm-7 offset-sm-1" 
+                                     value="#{userBean.usuario.direccion.municipio}" required="true"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Estado:" class="control-label col-sm-4" for="estado"/>
-                        <h:inputText id="estado" class="form-control col-sm-7 offset-sm-1" required="true"/>
-                        <h:message for="estado"/>
+                        <h:inputText id="estado" class="form-control col-sm-7 offset-sm-1" 
+                                     value="#{userBean.usuario.direccion.estado}" required="true"/>
                     </div>
                 </div>
                 <div class="clearfix visible-md-block"></div>

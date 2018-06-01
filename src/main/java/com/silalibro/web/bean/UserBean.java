@@ -5,6 +5,7 @@
  */
 package com.silalibro.web.bean;
 
+import com.silalibro.dao.CuentaDAO;
 import com.silalibro.dao.UsuarioDAO;
 import com.silalibro.dto.UsuarioDTO;
 import java.io.Serializable;
@@ -25,6 +26,7 @@ public class UserBean implements Serializable {
 
     /* DAO */
     private UsuarioDAO usuarioDAO_;
+    private CuentaDAO cuentaDAO_;
 
     /* GLOBAL VARIABLES */
     private String mensaje;
@@ -88,6 +90,17 @@ public class UserBean implements Serializable {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Ha ocurrido un error",
+                    ex.toString());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+    
+    public void cargarCuentaUsuario(){
+        try {
+            usuario.setCuenta(cuentaDAO_.obtenerCuentaPorUsuarioId(usuario.getIdusuario()));
+        } catch (Exception ex) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "Ha ocurrido un error",
                     ex.toString());

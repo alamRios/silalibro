@@ -5,6 +5,7 @@
  */
 package com.silalibro.dao;
 
+import com.silalibro.dto.DireccionDTO;
 import com.silalibro.dto.UsuarioDTO;
 import com.silalibro.utils.Conection;
 import java.sql.Connection;
@@ -16,7 +17,7 @@ import java.sql.ResultSet;
  * @author boozh
  */
 public class UsuarioDAO {
-    private final String SQL_SELECT_USUARIO_CORREO_CONTRA = "select * from usuario where usuario_email like ? and usuario_pass like ?"; 
+    private final String SQL_SELECT_USUARIO_CORREO_CONTRA = "select * from usuario join direccion on usuario.idDireccion = direccion.iddireccion where usuario_email like ? and usuario_pass like ?"; 
         
     public UsuarioDTO iniciarSesion(String correo, String contra) throws Exception{
         UsuarioDTO usuario = null; 
@@ -37,6 +38,16 @@ public class UsuarioDAO {
                 usuario.setApellidoPaterno(rs.getString("usuario_apellidoPaterno"));
                 usuario.setApellidoMaterno(rs.getString("usuario_apellidoMaterno"));
                 usuario.setAdministrador(rs.getBoolean("usuario_administrador"));
+                usuario.setFechaNacimiento(rs.getDate("usuario_fechaNacimiento"));
+                DireccionDTO direccion = new DireccionDTO();
+                direccion.setCalle(rs.getString("direccion_calle"));
+                direccion.setNumeroExterior(rs.getInt("direccion_numeroExterior"));
+                direccion.setNumeroInterior(rs.getInt("direccion_numeroInterior"));
+                direccion.setCP(rs.getString("direccion_cp"));
+                direccion.setColonia(rs.getString("direccion_colonia"));
+                direccion.setMunicipio(rs.getString("direccion_municipio"));
+                direccion.setEstado(rs.getString("direccion_estado"));
+                usuario.setDireccion(direccion);
             }
         }catch(Exception ex){
             throw ex; 

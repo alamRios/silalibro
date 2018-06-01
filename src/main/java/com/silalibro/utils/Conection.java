@@ -15,10 +15,10 @@ import java.sql.SQLException;
  */
 public class Conection {
     private static final String url = "jdbc:mysql://localhost/"; 
-    private static final String base = "silalibrodb?characterEncoding=UTF8";
+    private static final String base = "silalibroDB?characterEncoding=UTF8";
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String userName = "root";
-    private static final String password = "root";
+    private static final String password = "HQDJfnrad1-3";
     
     public static Connection obtenerConeccion() throws Exception{
         Connection con = null; 

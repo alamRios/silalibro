@@ -5,6 +5,8 @@
  */
 package com.silalibro.dto;
 
+import java.util.Date;
+
 /**
  *
  * @author boozh
@@ -16,6 +18,9 @@ public class UsuarioDTO {
     private String apellidoMaterno;
     private String email; 
     private boolean administrador; 
+    private DireccionDTO direccion; 
+    private Date fechaNacimiento; 
+    private CuentaDTO cuenta; 
     
     public UsuarioDTO(){
         this.idusuario = 0; 
@@ -24,11 +29,9 @@ public class UsuarioDTO {
         this.apellidoMaterno = ""; 
         this.email = ""; 
         this.administrador = false;
-    }
-    
-    public UsuarioDTO(String nombreUsuario, boolean administrador){
-        this.nombre = nombreUsuario; 
-        this.administrador = administrador; 
+        this.direccion = new DireccionDTO(); 
+        this.fechaNacimiento = new Date(); 
+        this.cuenta = new CuentaDTO(); 
     }
 
     public String getNombre() {
@@ -79,8 +82,27 @@ public class UsuarioDTO {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "UsuarioDTO{" + "idusuario=" + idusuario + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", email=" + email + ", administrador=" + administrador + '}';
+    public DireccionDTO getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(DireccionDTO direccion) {
+        this.direccion = direccion;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public CuentaDTO getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(CuentaDTO cuenta) {
+        this.cuenta = cuenta;
     }
 }

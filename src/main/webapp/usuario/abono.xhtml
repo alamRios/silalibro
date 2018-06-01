@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="../WEB-INF/layout.xhtml">
+    <ui:define name="headStyles">
+        <link rel="stylesheet" href="../css/colors.css"/>
+    </ui:define>
+    
+    <ui:define name="logo">
+        <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/administrador/index.xhtml">
+            <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
+        </a>
+    </ui:define>
+
+    <ui:define name="header">
+    </ui:define>
+
+    <ui:define name="content">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page"><a href="cuenta.xhtml">Mi cuenta</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="movimientos.xhtml">Movimientos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Abono</li>
+            </ol>
+        </nav>
+    </ui:define>
+</ui:composition>

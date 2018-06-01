@@ -28,15 +28,20 @@ public class CuentaDAO {
             st = con.prepareStatement(SQL_CUENTA_USUARIO_POR_ID); 
             st.setInt(1, usuarioid);
             rs = st.executeQuery(); 
-            if(rs.next()){
+            while(rs.next()){
                 MovimientoCuentaDTO movimiento = new MovimientoCuentaDTO();
-                movimiento.setMonto(rs.getDouble(""));
-                movimiento.setCargo(rs.getBoolean(""));
-                movimiento.setFolioTransaccion(rs.getString(""));
-                cuenta.totalCuenta += movimiento.getMonto(); 
+                movimiento.setMonto(rs.getDouble("movimiento_cuenta_monto"));
+                movimiento.setCargo(rs.getBoolean("movimiento_cuenta_cargo"));
+                movimiento.setFolioTransaccion(rs.getString("movimiento_cuenta_folioTransaccion"));
+                movimiento.setFechaRegistro(rs.getDate("movimiento_cuenta_fecha"));
+                if(movimiento.isCargo())
+                    cuenta.totalCuenta -= movimiento.getMonto(); 
+                else
+                    cuenta.totalCuenta += movimiento.getMonto(); 
                 cuenta.movimientos.add(movimiento);
             }
         }catch(Exception ex){
+            ex.printStackTrace();
             throw ex; 
         }finally{
             try{

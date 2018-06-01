@@ -46,6 +46,7 @@ public class UserBean implements Serializable {
         credencialesIncorrectas = false;
         usuarioDAO_ = new UsuarioDAO();
         nvousuario = new UsuarioDTO();
+        cuentaDAO_ = new CuentaDAO(); 
         Integer idusuario = (Integer) FacesContext.getCurrentInstance()
                 .getExternalContext().getSessionMap().get("idusuario");
         try {
@@ -82,6 +83,7 @@ public class UserBean implements Serializable {
                     context.getFlash().setKeepMessages(true);
                     context.redirect(context.getRequestContextPath() + "/administrador/index.xhtml");
                 }
+                credencialesIncorrectas = false; 
             } else {
                 credencialesIncorrectas = true;
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -102,6 +104,7 @@ public class UserBean implements Serializable {
         try {
             usuario.setCuenta(cuentaDAO_.obtenerCuentaPorUsuarioId(usuario.getIdusuario()));
         } catch (Exception ex) {
+            ex.printStackTrace();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "Ha ocurrido un error",
                     ex.toString());

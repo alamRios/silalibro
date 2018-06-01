@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="../WEB-INF/layout.xhtml">
+    
+    <ui:define name="headStyles">
+        <link rel="stylesheet" href="../css/colors.css"/>
+    </ui:define>
+
+    <ui:define name="logo">
+        <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/index.xhtml">
+            <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
+        </a>
+    </ui:define>
+
+    <ui:define name="header">
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <img class="card-img-top" src="https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-1-495x750.jpg" alt=""></img>
+                    <div class="card-body">
+                        <h4 class="card-title">The brief history of the dead</h4>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Rentar</a>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                La historia tiene lugar en dos ámbitos concurrentemente a mediados del siglo XXI: en la Tierra, en los Estados Unidos y la Antártida, y en un lugar más allá de la muerte llamado La Ciudad. La gente en The City está allí solo mientras alguien que los recuerda esté vivo en la tierra. Llegan, generalmente con la constatación de que han muerto, y se convierten en miembros de la comunidad allí de forma similar a cuando estaban vivos. La ciudad misma se expande y contrae para acomodar a los muertos recientemente o la muerte de las últimas personas para recordarlos. En la tierra, las cosas han continuado en las trayectorias pronosticadas a principios de siglo: los casquetes polares se están derritiendo y el terrorismo biológico es una gran preocupación social. Sin embargo, The Coca-Cola Company está tratando de sacar lo mejor de ambos desarrollos planeando usar agua de la Antártida en su refresco; utilizan acrobacias publicitarias que explotan los temores de las personas para generar interés de marca. Como parte de su último truco publicitario, envían un equipo de científicos a la Antártida para investigar la viabilidad de utilizar el "agua más fresca en la tierra", aislando así su producto del suministro regular de agua (que se supone está bajo constante amenaza de contaminación a manos de terroristas biológicos). De hecho, se libera un virus letal y, a medida que aumenta el número de víctimas mortales, la población de The City comienza a fluctuar de forma alarmante. Al principio The City se expande: edificios y bloques completos se materializan para acomodar a los recién llegados, pero luego, a medida que los vivos que recuerdan a los difuntos también mueren, la gente en The City se desvanece repentinamente y también lo hacen los edificios y bloques enteros.
+            </div>
+        </div>  
+    </ui:define>
+</ui:composition>

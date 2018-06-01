@@ -82,6 +82,7 @@ public class UserBean implements Serializable {
                     context.getFlash().setKeepMessages(true);
                     context.redirect(context.getRequestContextPath() + "/administrador/index.xhtml");
                 }
+                credencialesIncorrectas = false; 
             } else {
                 credencialesIncorrectas = true;
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,

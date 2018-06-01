@@ -4,10 +4,14 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 template="../WEB-INF/layout.xhtml">
+
+    <f:metadata>
+        <f:viewAction action="#{autorBean.cargarAutores}" />
+    </f:metadata>
     <ui:define name="headStyles">
         <link rel="stylesheet" href="../css/colors.css"/>
     </ui:define>
-    
+
     <ui:define name="logo">
         <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/administrador/index.xhtml">
             <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
@@ -26,43 +30,74 @@
         </nav>
         <div class="row">
             <div class="col">
-                <a href="autores.xhtml" class="btn btn-outline-dark float-right"> Añadir autor <i class="fa fa-plus-o" aria-hidden="true"></i></a>
+                <a data-toggle="modal" data-target="#modalAutor" class="btn btn-outline-dark float-right"> Añadir autor <i class="fa fa-plus-o" aria-hidden="true"></i></a>
             </div>
         </div>  
         <br/>
         <div class="row">
             <div class="col">
-                <p:dataTable var="movimiento" value="#{userBean.usuario.cuenta.movimientos}"
+                <p:dataTable var="autor" value="#{autorBean.autores}"
                              rows="10" paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15" emptyMessage="No hay movimientos registrados">
+                             rowsPerPageTemplate="5,10,15" emptyMessage="No hay autores registrados">
                     <f:facet name="header">
-                        Lista de movimientos
+                        Lista de autores registrados
                     </f:facet>
-                    <p:column headerText="Fecha de movimiento">
-                        <h:outputText value="#{movimiento.fechaRegistro}">
-                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-                        </h:outputText>
+                    <p:column headerText="Nombre del autor">
+                        <h:outputText value="#{autor.nombreCompleto}" />
                     </p:column>
 
-                    <p:column headerText="Folio">
-                        <h:outputText value="#{movimiento.folioTransaccion}" />
+                    <p:column headerText="País">
+                        <h:outputText value="#{autor.nombrePais}" />
                     </p:column>
-
-                    <p:column headerText="Tipo">
-                        <h:outputText value="#{movimiento.cargo ? 'Cargo' : 'Abono'}" />
-                    </p:column>
-
-                    <p:column headerText="Monto">
-                        <h:outputText value="$ #{movimiento.monto}" />
-                    </p:column>
-
-                    <f:facet name="footer">
-                            <h:outputText value="SALDO TOTAL DE LA CUENTA: $ #{userBean.usuario.cuenta.totalCuenta}">
-                            </h:outputText>
-                    </f:facet>
                 </p:dataTable>
             </div>
         </div>
+
+        <div class="modal fade" tabindex="-1" role="dialog" 
+             aria-labelledby="modalAutor" id="modalAutor">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Autor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h:form id="formRegistroAutor">
+                            <div class="container">
+                                <div class="form-group">
+                                    <label for="txtNombre">Nombre:</label>
+                                    <h:inputText id="txtNombre" value="#{autorBean.autorNuevo.nombre}" 
+                                                 class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtApellidoPaterno">Apellido paterno:</label>
+                                    <h:inputText id="txtApellidoPaterno" value="#{autorBean.autorNuevo.apellidoPaterno}" 
+                                                 class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtApellidoMaterno">Apellido materno:</label>
+                                    <h:inputText id="txtApellidoMaterno" value="#{autorBean.autorNuevo.appellidoMaterno}" 
+                                                 class="form-control"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="float-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
+                                    <h:commandButton class="btn btn-success" 
+                                                     action="#{userBean.iniciarSesion}" value="Registrar">
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div> 
     </ui:define>
 </ui:composition>

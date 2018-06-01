@@ -15,4 +15,44 @@ public class AutorDTO {
     public String appellidoMaterno; 
     public String nombrePais; 
     public int idPais; 
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getAppellidoMaterno() {
+        return appellidoMaterno;
+    }
+
+    public void setAppellidoMaterno(String appellidoMaterno) {
+        this.appellidoMaterno = appellidoMaterno;
+    }
+
+    public String getNombrePais() {
+        return nombrePais;
+    }
+
+    public void setNombrePais(String nombrePais) {
+        this.nombrePais = nombrePais;
+    }
+
+    public int getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
+    }
 }

@@ -13,12 +13,14 @@ public class LibroDTO {
     private String sku; 
     private String idautor;
     private String librocol ; 
+    private AutorDTO autor; 
     
     public LibroDTO(){
         this.idlibro = 0; 
         this.titulo = ""; 
         this.sku = ""; 
-        this.librocol = ""; 
+        this.librocol = "";
+        autor = new AutorDTO(); 
     }
     
     public LibroDTO(String titulo){

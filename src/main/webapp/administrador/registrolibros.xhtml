@@ -6,6 +6,13 @@
                 template="../WEB-INF/layout.xhtml">
     <ui:define name="header">
     </ui:define>
+    
+    <ui:define name="logo">
+        <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/administrador/index.xhtml">
+            <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
+        </a>
+    </ui:define>
+    
     <ui:define name="content">
         <h1 class="text-center">Registro de libros</h1>
         <br/>

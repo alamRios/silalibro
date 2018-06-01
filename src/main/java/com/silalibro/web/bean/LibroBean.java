@@ -30,8 +30,7 @@ public class LibroBean {
     
     public void registrarLibro(){
         try{
-            libroNuevo.setSku(sku);
-            if(libroDAO_.registrarArticulo(libroNuevo)){
+            if(libroDAO_.registrarlibros(libroNuevo)!=null){
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
                         "El libro guardado correctamente",
                         "Sólo espera a que sea aceptado");

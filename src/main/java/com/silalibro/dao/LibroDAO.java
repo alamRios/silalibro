@@ -20,17 +20,17 @@ public class LibroDAO {
     private final String SQL_SELECT_LIBRO = "select * from libro where titulo like ?"; 
     private final String SQL_SELECT_REGISTRAR_LIBRO = "INSERT INTO libros (libro_sku,libro_titulo,libro_idautor,librocol) VALUES (?,?,?,?);"; 
         
-    public LibroDTO registrarlibros(String sku, String titulo, String idautor, String librocol) throws Exception{
-        LibroDTO libro = null; 
+    public LibroDTO registrarlibros(LibroDTO libro) throws Exception{
+        LibroDTO libro_ = null; 
         Connection con = null; 
         PreparedStatement st = null; 
         try{
             con = Conection.obtenerConeccion(); 
             st = con.prepareStatement(SQL_SELECT_REGISTRAR_LIBRO); 
-            st.setString(1, sku);
-            st.setString(2, titulo);
-            st.setString(3, idautor);
-            st.setString(4, librocol);
+            st.setString(1, libro.getSku());
+            st.setInt(2, libro.getIdautor());
+            st.setString(3, libro.getTitulo());
+            st.setString(4, libro.getLibrocol());
             st.executeUpdate(); 
             
         }catch(Exception ex){

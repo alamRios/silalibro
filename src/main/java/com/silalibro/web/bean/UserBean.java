@@ -30,7 +30,7 @@ public class UserBean implements Serializable {
 
     /* GLOBAL VARIABLES */
     private String mensaje;
-    private UsuarioDTO usuario;
+    private UsuarioDTO usuario, nvousuario;
 
     /* LOGIN VARIABLES */
     private String correo_usr;
@@ -45,6 +45,7 @@ public class UserBean implements Serializable {
         mensaje = "Bienvenido a Silalibro";
         credencialesIncorrectas = false;
         usuarioDAO_ = new UsuarioDAO();
+        nvousuario = new UsuarioDTO();
         Integer idusuario = (Integer) FacesContext.getCurrentInstance()
                 .getExternalContext().getSessionMap().get("idusuario");
         try {
@@ -96,8 +97,8 @@ public class UserBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
-    
-    public void cargarCuentaUsuario(){
+
+    public void cargarCuentaUsuario() {
         try {
             usuario.setCuenta(cuentaDAO_.obtenerCuentaPorUsuarioId(usuario.getIdusuario()));
         } catch (Exception ex) {
@@ -106,6 +107,43 @@ public class UserBean implements Serializable {
                     ex.toString());
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
+    }
+
+    public void agregarUsuario() {
+        try {
+            usuarioDAO_.create(nvousuario);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Ha ocurrido un error",
+                    ex.toString());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+
+    }
+
+    public UsuarioDAO getUsuarioDAO_() {
+        return usuarioDAO_;
+    }
+
+    public void setUsuarioDAO_(UsuarioDAO usuarioDAO_) {
+        this.usuarioDAO_ = usuarioDAO_;
+    }
+
+    public CuentaDAO getCuentaDAO_() {
+        return cuentaDAO_;
+    }
+
+    public void setCuentaDAO_(CuentaDAO cuentaDAO_) {
+        this.cuentaDAO_ = cuentaDAO_;
+    }
+
+    public UsuarioDTO getNvousuario() {
+        return nvousuario;
+    }
+
+    public void setNvousuario(UsuarioDTO nvousuario) {
+        this.nvousuario = nvousuario;
     }
 
     public String getMensaje() {

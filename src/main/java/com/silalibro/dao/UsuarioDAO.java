@@ -11,6 +11,8 @@ import com.silalibro.utils.Conection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
 
 /**
  *
@@ -18,7 +20,15 @@ import java.sql.ResultSet;
  */
 public class UsuarioDAO {
     private final String SQL_SELECT_USUARIO_CORREO_CONTRA = "select * from usuario join direccion on usuario.idDireccion = direccion.iddireccion where usuario_email like ? and usuario_pass like ?"; 
-        
+    
+    private static final String SQL_INSERT_DIR = "INSERT INTO direccion(direccion_calle, direccion_numeroExterior,"
+            + "direccion_numeroInterior, direccion_cp, direccion_colonia, direccion_municipio, direccion_estado)"
+            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    private static final String SQL_INSERT_USUARIO = "INSERT INTO usuario (usuario_email, usuario_pass, usuario_nombre, "
+            + "usuario_apellidoMaterno, usuario_apellidoPaterno, usuraio_fechaNacimiento, idDireccion,"
+            + "usuario_administrador) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+
     public UsuarioDTO iniciarSesion(String correo, String contra) throws Exception{
         UsuarioDTO usuario = null; 
         Connection con = null; 
@@ -65,4 +75,53 @@ public class UsuarioDAO {
         }
         return usuario; 
     }
+    
+    public void create(UsuarioDTO nvousuario) throws Exception {
+        PreparedStatement st = null;
+        Connection con = null;
+        ResultSet rs = null;
+        try {
+            con = Conection.obtenerConeccion();
+            st = con.prepareStatement(SQL_INSERT_DIR);
+            st.setString(1, nvousuario.getDireccion().getCalle());
+            st.setInt(2, nvousuario.getDireccion().getNumeroExterior());
+            st.setInt(3, nvousuario.getDireccion().getNumeroInterior());
+            st.setString(4, nvousuario.getDireccion().getCP());
+            st.setString(5, nvousuario.getDireccion().getColonia());
+            st.setString(6, nvousuario.getDireccion().getMunicipio());
+            st.setString(7, nvousuario.getDireccion().getEstado());
+            st.executeUpdate();
+            rs = st.executeQuery();
+
+            /*st = con.prepareStatement(SQL_INSERT_USUARIO);
+            st.setString(1, nvousuario.getEmail());
+            st.setString(2, nvousuario.getPass());
+            st.setString(3, nvousuario.getNombre());
+            st.setString(4, nvousuario.getApellidoMaterno());
+            st.setString(5, nvousuario.getApellidoPaterno());
+            st.setDate(6, (Date) nvousuario.getFechaNac());
+            st.setInt(7, nvousuario.getDir().getIdDireccion());
+            st.setBoolean(8, nvousuario.isAdministrador());
+            st.executeUpdate();
+            rs = st.executeQuery();*/
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                throw ex;
+            }
+        }
+
+    }
+    
 }

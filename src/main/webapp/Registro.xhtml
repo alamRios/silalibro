@@ -15,17 +15,22 @@
                     <h3 class="text-center my-3">Datos de la cuenta</h3>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Nombre:" class="control-label col-sm-2" for="nombre"/>
-                        <h:inputText id="nombre" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                        <h:inputText id="nombre" value="#{userBean.nvousuario.nombre}" class="form-control col-sm-9 offset-sm-1" required="true"/>
                         <h:message for="nombre"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
-                        <h:outputLabel value="Apellido:" class="control-label col-sm-2" for="apellido"/>
-                        <h:inputText id="apellido" class="form-control col-sm-9 offset-sm-1" required="true"/>
-                        <h:message for="apellido"/>
+                        <h:outputLabel value="Apellido Paterno:" class="control-label col-sm-2" for="apepat"/>
+                        <h:inputText id="apepat" value="#{userBean.nvousuario.apellidoPaterno}" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                        <h:message for="apepat"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Apellido Materno:" class="control-label col-sm-2" for="apemat"/>
+                        <h:inputText id="apemat" value="#{userBean.nvousuario.apellidoMaterno}" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                        <h:message for="apemat"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Email:" class="control-label col-sm-2" for="email"/>
-                        <h:inputText id="email" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                        <h:inputText id="email" value="#{userBean.nvousuario.email}" class="form-control col-sm-9 offset-sm-1" required="true"/>
                         <h:message for="email"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
@@ -39,99 +44,46 @@
                         <h:message for="confcontra"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
-                        <h:outputLabel value="Año de nacimiento:" class="control-label col-sm-2" for="añonac"/>
-                        <h:selectOneMenu value = "" id="añonac" class="form-control col-sm-4 offset-sm-1" required="true"> 
-                            <f:selectItem itemValue = "1950" itemLabel = "1950" />
-                            <f:selectItem itemValue = "1951" itemLabel = "1951" />
-                            <f:selectItem itemValue = "1952" itemLabel = "1952" />
-                            <f:selectItem itemValue = "1953" itemLabel = "1953" />
-                            <f:selectItem itemValue = "1954" itemLabel = "1954" />
-                            <f:selectItem itemValue = "1955" itemLabel = "1955" />
-                            <f:selectItem itemValue = "1956" itemLabel = "1956" />
-                            <f:selectItem itemValue = "1957" itemLabel = "1957" />
-                            <f:selectItem itemValue = "1958" itemLabel = "1958" />
-                            <f:selectItem itemValue = "1959" itemLabel = "1959" />
-                            <f:selectItem itemValue = "1960" itemLabel = "1960" />
-                            <f:selectItem itemValue = "1961" itemLabel = "1961" />
-                            <f:selectItem itemValue = "1962" itemLabel = "1962" />
-                            <f:selectItem itemValue = "1963" itemLabel = "1963" />
-                            <f:selectItem itemValue = "1964" itemLabel = "1964" />
-                            <f:selectItem itemValue = "1965" itemLabel = "1965" />
-                            <f:selectItem itemValue = "1966" itemLabel = "1966" />
-                            <f:selectItem itemValue = "1967" itemLabel = "1967" />
-                            <f:selectItem itemValue = "1968" itemLabel = "1968" />
-                            <f:selectItem itemValue = "1969" itemLabel = "1969" />
-                            <f:selectItem itemValue = "1970" itemLabel = "1970" />
-                            <f:selectItem itemValue = "1971" itemLabel = "1971" />
-                            <f:selectItem itemValue = "1972" itemLabel = "1972" />
-                            <f:selectItem itemValue = "1973" itemLabel = "1973" />
-                            <f:selectItem itemValue = "1974" itemLabel = "1974" />
-                            <f:selectItem itemValue = "1975" itemLabel = "1975" />
-                            <f:selectItem itemValue = "1976" itemLabel = "1976" />
-                            <f:selectItem itemValue = "1977" itemLabel = "1977" />
-                            <f:selectItem itemValue = "1978" itemLabel = "1978" />
-                            <f:selectItem itemValue = "1979" itemLabel = "1979" />
-                            <f:selectItem itemValue = "1980" itemLabel = "1980" />
-                            <f:selectItem itemValue = "1981" itemLabel = "1981" />
-                            <f:selectItem itemValue = "1982" itemLabel = "1982" />
-                            <f:selectItem itemValue = "1983" itemLabel = "1983" />
-                            <f:selectItem itemValue = "1984" itemLabel = "1984" />
-                            <f:selectItem itemValue = "1985" itemLabel = "1985" />
-                            <f:selectItem itemValue = "1986" itemLabel = "1986" />
-                            <f:selectItem itemValue = "1987" itemLabel = "1987" />
-                            <f:selectItem itemValue = "1988" itemLabel = "1988" />
-                            <f:selectItem itemValue = "1989" itemLabel = "1989" />
-                            <f:selectItem itemValue = "1990" itemLabel = "1990" />
-                            <f:selectItem itemValue = "1991" itemLabel = "1991" />
-                            <f:selectItem itemValue = "1992" itemLabel = "1992" />
-                            <f:selectItem itemValue = "1993" itemLabel = "1993" />
-                            <f:selectItem itemValue = "1994" itemLabel = "1994" />
-                            <f:selectItem itemValue = "1995" itemLabel = "1995" />
-                            <f:selectItem itemValue = "1996" itemLabel = "1996" />
-                            <f:selectItem itemValue = "1997" itemLabel = "1997" />
-                            <f:selectItem itemValue = "1998" itemLabel = "1998" />
-                            <f:selectItem itemValue = "1999" itemLabel = "1999" />
-                            <f:selectItem itemValue = "2000" itemLabel = "2000" />
-                            <f:selectItem itemValue = "2001" itemLabel = "2001" />
-                        </h:selectOneMenu> 
-                        <h:message for="añonac"/>
+                        <h:outputLabel value="Fecha de nacimiento:" class="control-label col-sm-2" for="popup"/>
+                        <p:calendar id="popup" value="#{userBean.nvousuario.fechaNacimiento}" class="col-sm-7 offset-sm-1" required="true"/>
+                        <h:message for="popup"/>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <h3 class="text-center my-3">Datos de contacto</h3>
                     <div class="form-group form-inline col-sm-12 col-md-12">
                         <h:outputLabel value="Calle:" class="control-label col-sm-4" for="calle"/>
-                        <h:inputText id="calle" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:inputText id="calle" value="#{userBean.nvousuario.direccion.calle}" class="form-control col-sm-7 offset-sm-1" required="true"/>
                         <h:message for="calle"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Número exterior:" class="control-label col-sm-4" for="numext"/>
-                        <h:inputText id="numext" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:inputText id="numext" value="#{userBean.nvousuario.direccion.numeroExterior}" class="form-control col-sm-7 offset-sm-1" required="true"/>
                         <h:message for="numext"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Número interior:" class="control-label col-sm-4" for="numint"/>
-                        <h:inputText id="numint" class="form-control col-sm-7 offset-sm-1"/>
+                        <h:inputText id="numint" value="#{userBean.nvousuario.direccion.numeroInterior}" class="form-control col-sm-7 offset-sm-1"/>
                     </div>
 
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Código postal:" class="control-label col-sm-4" for="postal"/>
-                        <h:inputText id="postal" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:inputText id="postal" value="#{userBean.nvousuario.direccion.CP}" class="form-control col-sm-7 offset-sm-1" required="true"/>
                         <h:message for="postal"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Colonia:" class="control-label col-sm-4" for="colonia"/>
-                        <h:inputText id="colonia" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:inputText id="colonia" value="#{userBean.nvousuario.direccion.colonia}" class="form-control col-sm-7 offset-sm-1" required="true"/>
                         <h:message for="colonia"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Municipio/Alcaldía:" class="control-label col-sm-4" for="municipio"/>
-                        <h:inputText id="municipio" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:inputText id="municipio" value="#{userBean.nvousuario.direccion.municipio}" class="form-control col-sm-7 offset-sm-1" required="true"/>
                         <h:message for="municipio"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="Estado:" class="control-label col-sm-4" for="estado"/>
-                        <h:inputText id="estado" class="form-control col-sm-7 offset-sm-1" required="true"/>
+                        <h:inputText id="estado" value="#{userBean.nvousuario.direccion.estado}" class="form-control col-sm-7 offset-sm-1" required="true"/>
                         <h:message for="estado"/>
                     </div>
                 </div>
@@ -140,7 +92,7 @@
             <br/>
             <div class="row">
                 <div class="mx-auto">
-                    <h:commandButton value="Registrarme" class="btn btn-info"/>
+                    <h:commandButton value="Registrarme" class="btn btn-info" actionListener="#{userBean.agregarUsuario()}"/>
                 </div>
             </div>
         </h:form>

@@ -18,7 +18,7 @@ import java.sql.ResultSet;
  */
 public class LibroDAO {
     private final String SQL_SELECT_LIBRO = "select * from libro where titulo like ?"; 
-    private final String SQL_SELECT_REGISTRAR_LIBRO = "INSERT INTO libros (libro_sku,libro_titulo,libro_idautor,librocol) VALUES (?,?,?,?);"; 
+    private final String SQL_SELECT_REGISTRAR_LIBRO = "INSERT INTO libro (libro_sku,libro_titulo,libro_idautor,librocol) VALUES (?,?,?,?);"; 
         
     public LibroDTO registrarlibros(LibroDTO libro) throws Exception{
         LibroDTO libro_ = null; 

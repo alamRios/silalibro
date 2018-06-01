@@ -4,15 +4,12 @@
  * and open the template in the editor.
  */
 package com.silalibro.web.bean;
-import com.silalibro.web.bean.*;
-import com.silalibro.dto.LibrosDTO;
-import java.io.Serializable;
-import java.util.ArrayList;
-import javax.faces.bean.ManagedBean;
+import com.silalibro.dao.LibroDAO;
+import com.silalibro.dto.LibroDTO;
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -20,15 +17,21 @@ import javax.faces.context.FacesContext;
  * @author booz
  */
 @ManagedBean
+@ViewScoped
 public class LibroBean {
-    private LibrosDTO libroNuevo; 
+    private LibroDTO libroNuevo; 
+    private LibroDAO libroDAO_;
+    
+    @PostConstruct
     public void init(){
-    libroNuevo = new LibrosDTO();
+        libroNuevo = new LibroDTO();
+        libroDAO_ = new LibroDAO(); 
     }
+    
     public void registrarLibro(){
         try{
             libroNuevo.setSku(sku);
-            if(libro_.registrarArticulo(libroNuevo)){
+            if(libroDAO_.registrarArticulo(libroNuevo)){
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
                         "El libro guardado correctamente",
                         "Sólo espera a que sea aceptado");
@@ -44,4 +47,11 @@ public class LibroBean {
         }
     }
 
+    public LibroDTO getLibroNuevo() {
+        return libroNuevo;
+    }
+
+    public void setLibroNuevo(LibroDTO libroNuevo) {
+        this.libroNuevo = libroNuevo;
+    }
 }

@@ -1,27 +1,27 @@
 
 package com.silalibro.dto;
 
-import com.silalibro.dto.LibrosDTO.*;
+import com.silalibro.dto.LibroDTO.*;
 
 /**
  *
  * @author boozh
  */
-public class LibrosDTO {
+public class LibroDTO {
     private int idlibro; 
     private String titulo;
     private String sku; 
     private String idautor;
     private String librocol ; 
     
-    public LibrosDTO(){
+    public LibroDTO(){
         this.idlibro = 0; 
         this.titulo = ""; 
         this.sku = ""; 
         this.librocol = ""; 
     }
     
-    public LibrosDTO(String titulo){
+    public LibroDTO(String titulo){
         this.titulo = titulo; 
     }
 

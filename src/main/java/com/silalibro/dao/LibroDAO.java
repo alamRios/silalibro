@@ -5,7 +5,7 @@
  */
 package com.silalibro.dao;
 
-import com.silalibro.dto.LibrosDTO;
+import com.silalibro.dto.LibroDTO;
 import com.silalibro.utils.Conection;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,14 +20,11 @@ public class LibroDAO {
     private final String SQL_SELECT_LIBRO = "select * from libro where titulo like ?"; 
     private final String SQL_SELECT_REGISTRAR_LIBRO = "INSERT INTO libros (libro_sku,libro_titulo,libro_idautor,librocol) VALUES (?,?,?,?);"; 
         
-    public LibrosDTO registrarlibros(String sku, String titulo, String idautor, String librocol) throws Exception{
-        LibrosDTO libro = null; 
+    public LibroDTO registrarlibros(String sku, String titulo, String idautor, String librocol) throws Exception{
+        LibroDTO libro = null; 
         Connection con = null; 
         PreparedStatement st = null; 
         try{
-            String driver = "com.mysql.jdbc.Driver";
-            String dburl = "jdbc:mysql://localhost/db";
-            Class.forName(driver);
             con = Conection.obtenerConeccion(); 
             st = con.prepareStatement(SQL_SELECT_REGISTRAR_LIBRO); 
             st.setString(1, sku);

@@ -4,13 +4,10 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 template="../WEB-INF/layout.xhtml">
-    <f:metadata>
-        <f:viewAction action="#{userBean.cargarCuentaUsuario}" />
-    </f:metadata>
     <ui:define name="headStyles">
         <link rel="stylesheet" href="../css/colors.css"/>
     </ui:define>
-
+    
     <ui:define name="logo">
         <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/administrador/index.xhtml">
             <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
@@ -23,15 +20,15 @@
     <ui:define name="content">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><a href="cuenta.xhtml">Mi cuenta</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Movimientos</li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="index.xhtml">Administrador</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Autores</li>
             </ol>
         </nav>
         <div class="row">
             <div class="col">
-                <a href="abono.xhtml" class="btn btn-outline-success float-right"> Realizar abono <i class="fa fa-money" aria-hidden="true"></i> </a>
+                <a href="autores.xhtml" class="btn btn-outline-dark float-right"> Añadir autor <i class="fa fa-plus-o" aria-hidden="true"></i></a>
             </div>
-        </div>
+        </div>  
         <br/>
         <div class="row">
             <div class="col">

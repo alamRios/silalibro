@@ -10,12 +10,16 @@ package com.silalibro.dto;
  * @author arios
  */
 public class AutorDTO {
-    public String nombre; 
-    public String apellidoPaterno; 
-    public String appellidoMaterno; 
-    public String nombrePais; 
-    public int idPais; 
+    private String nombre; 
+    private String apellidoPaterno; 
+    private String appellidoMaterno; 
+    private String nombrePais; 
+    private int idPais; 
 
+    public String getNombreCompleto(){
+        return nombre + " "+ apellidoPaterno+ " "+ appellidoMaterno;
+    }
+    
     public String getNombre() {
         return nombre;
     }

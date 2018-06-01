@@ -45,6 +45,7 @@ public class UserBean implements Serializable {
         mensaje = "Bienvenido a Silalibro";
         credencialesIncorrectas = false;
         usuarioDAO_ = new UsuarioDAO();
+        cuentaDAO_ = new CuentaDAO(); 
         Integer idusuario = (Integer) FacesContext.getCurrentInstance()
                 .getExternalContext().getSessionMap().get("idusuario");
         try {
@@ -101,6 +102,7 @@ public class UserBean implements Serializable {
         try {
             usuario.setCuenta(cuentaDAO_.obtenerCuentaPorUsuarioId(usuario.getIdusuario()));
         } catch (Exception ex) {
+            ex.printStackTrace();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "Ha ocurrido un error",
                     ex.toString());

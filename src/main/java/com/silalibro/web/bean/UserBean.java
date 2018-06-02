@@ -36,7 +36,10 @@ public class UserBean implements Serializable {
     private String correo_usr;
     private String passwd_usr;
     private boolean credencialesIncorrectas;
-
+    
+    /* REGISTRO VARIABLES */
+    private String passwd_nvo; 
+    
     public UserBean() {
     }
 
@@ -114,7 +117,7 @@ public class UserBean implements Serializable {
 
     public void agregarUsuario() {
         try {
-            usuarioDAO_.create(nvousuario);
+            usuarioDAO_.create(nvousuario,passwd_nvo);
         } catch (Exception ex) {
             ex.printStackTrace();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -187,6 +190,14 @@ public class UserBean implements Serializable {
 
     public void setCredencialesIncorrectas(boolean credencialesIncorrectas) {
         this.credencialesIncorrectas = credencialesIncorrectas;
+    }
+
+    public String getPasswd_nvo() {
+        return passwd_nvo;
+    }
+
+    public void setPasswd_nvo(String passwd_nvo) {
+        this.passwd_nvo = passwd_nvo;
     }
 
 }

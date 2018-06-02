@@ -6,7 +6,9 @@
 package com.silalibro.web.bean;
 
 import com.silalibro.dao.AutorDAO;
+import com.silalibro.dao.PaisDAO;
 import com.silalibro.dto.AutorDTO;
+import com.silalibro.dto.PaisDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -25,17 +27,31 @@ public class AutorBean {
     private List<AutorDTO> autores; 
     private AutorDTO autorNuevo; 
     private AutorDAO autorDAO_; 
-    
+    private PaisDAO paisDAO_; 
+    private List<PaisDTO> paises; 
+            
     @PostConstruct
     public void init(){
         autorNuevo = new AutorDTO(); 
         autorDAO_ = new AutorDAO(); 
         autores = new ArrayList<>(); 
+        paisDAO_ = new PaisDAO(); 
     }
     
     public void cargarAutores(){
         try{
             autores = autorDAO_.obtenerAutores(); 
+        }catch(Exception ex){
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Ha ocurrido un error",
+                    ex.toString());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+    
+    public void cargarPaises(){
+        try{
+            paises = paisDAO_.obtenerPaises(); 
         }catch(Exception ex){
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "Ha ocurrido un error",
@@ -66,6 +82,14 @@ public class AutorBean {
 
     public void setAutores(List<AutorDTO> autores) {
         this.autores = autores;
+    }
+
+    public List<PaisDTO> getPaises() {
+        return paises;
+    }
+
+    public void setPaises(List<PaisDTO> paises) {
+        this.paises = paises;
     }
     
 }

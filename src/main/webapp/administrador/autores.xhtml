@@ -7,11 +7,13 @@
 
     <f:metadata>
         <f:viewAction action="#{autorBean.cargarAutores}" />
+        <f:viewAction action="#{autorBean.cargarPaises()}" />
     </f:metadata>
     <ui:define name="headStyles">
         <link rel="stylesheet" href="../css/colors.css"/>
     </ui:define>
-
+    <ui:define name="jquery">
+    </ui:define>
     <ui:define name="logo">
         <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/administrador/index.xhtml">
             <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
@@ -81,6 +83,14 @@
                                     <label for="txtApellidoMaterno">Apellido materno:</label>
                                     <h:inputText id="txtApellidoMaterno" value="#{autorBean.autorNuevo.appellidoMaterno}" 
                                                  class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ddlPais">País:</label>
+                                    <h:selectOneMenu class="form-control" id="ddlPais" value="#{autorBean.autorNuevo.idPais}">
+                                        <f:selectItems value="#{autorBean.paises}" 
+                                                       var="pais" itemLabel="#{pais.nombrePais}" 
+                                                       itemValue="#{pais.idpais}"/>
+                                    </h:selectOneMenu>
                                 </div>
                             </div>
                             <br/>

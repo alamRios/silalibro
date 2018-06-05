@@ -20,7 +20,8 @@ public class Conection {
     private static final String userName = "root";
     //private static final String password = "y3y0mysql";
     //private static final String password = "root";
-    private static final String password = "HQDJfnrad1-3";
+    //private static final String password = "HQDJfnrad1-3";
+    private static final String password = "Rascuacho1";
     
     public static Connection obtenerConeccion() throws Exception{
         Connection con = null; 

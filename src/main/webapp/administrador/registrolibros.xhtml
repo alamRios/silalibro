@@ -16,7 +16,7 @@
     <ui:define name="content">
         <h1 class="text-center">Registro de libros</h1>
         <br/>
-        <h:form>
+        <h:form enctype="multipart/form-data">
             <div class="row bg-registroLibros">
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <h3 class="text-center my-3">Datos del libro</h3>
@@ -32,9 +32,14 @@
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="idautor:" class="control-label col-sm-2" for="idautor"/>
-                        <h:inputText id="idautor" class="form-control col-sm-9 offset-sm-1" required="true"/>
+                        <h:inputText id="Autor" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.idautor}" required="true"/>
                         <h:message for="idautor"/>
-                    </div>   
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <label for="Portda"> Portada </label>
+                        <h:inputFile class="form-control" id="ifFotos"
+                                     value="#{libroBean.libroNuevo.librocol}"></h:inputFile>
+                    </div> 
                 </div>
                 
                 </div>
@@ -42,9 +47,9 @@
           
             <br/>
             <div class="row">
-                <h:commandLink class="btn btn-lg btn-success btn-block"
-                                   action="#{libroBean.registrarLibro}"
-                                   value="Subir articulo"></h:commandLink>
+                <h:commandButton class="btn btn-lg btn-success btn-block"
+                                   actionListener="#{libroBean.registrarLibro}"
+                                   value="Registrar Libro"></h:commandButton>
             </div>
         </h:form>
     </ui:define>

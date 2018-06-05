@@ -1,7 +1,10 @@
 
 package com.silalibro.dto;
 
+
 import com.silalibro.dto.LibroDTO.*;
+import javax.servlet.http.Part;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -12,14 +15,14 @@ public class LibroDTO {
     private String titulo;
     private String sku; 
     private int idautor;
-    private String librocol ; 
+    private Part librocol ; 
     private AutorDTO autor; 
     
     public LibroDTO(){
         this.idlibro = 0; 
         this.titulo = ""; 
         this.sku = ""; 
-        this.librocol = "";
+        this.idautor = 0;
         autor = new AutorDTO(); 
     }
     
@@ -51,7 +54,7 @@ public class LibroDTO {
         this.sku = sku;
     }
 
-    public Integer getIdautor() {
+    public int getIdautor() {
         return idautor;
     }
 
@@ -59,18 +62,22 @@ public class LibroDTO {
         this.idautor = idautor;
     }
 
-    public String getLibrocol() {
+    public Part getLibrocol() {
         return librocol;
     }
 
-    public void setLibrocol(String librocol) {
+    public void setLibrocol(Part librocol) {
         this.librocol = librocol;
     }
 
     @Override
     public String toString() {
-        return "Libros1{" + "idlibro=" + idlibro + ", titulo=" + titulo + ", sku=" + sku + ", idautor=" + idautor + ", librocol=" + librocol + '}';
+        return "LibroDTO{" + "idlibro=" + idlibro + ", titulo=" + titulo + ", sku=" + sku + ", idautor=" + idautor + ", librocol=" + librocol + ", autor=" + autor + '}';
     }
+
+
+
+
 
 
    

@@ -14,6 +14,15 @@ public class AutorDTO {
     private String apellidoPaterno; 
     private String appellidoMaterno; 
     private String nombrePais; 
+    private int idautor;
+
+    public int getIdautor() {
+        return idautor;
+    }
+
+    public void setIdautor(int idautor) {
+        this.idautor = idautor;
+    }
     private int idPais; 
 
     public String getNombreCompleto(){

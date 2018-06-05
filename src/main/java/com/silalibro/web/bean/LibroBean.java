@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.silalibro.web.bean;
 import com.silalibro.dao.LibroDAO;
 import com.silalibro.dto.LibroDTO;
@@ -30,10 +25,9 @@ public class LibroBean {
     
     public void registrarLibro(){
         try{
-            if(libroDAO_.registrarlibros(libroNuevo)!=null){
+            if(libroDAO_.registrarLibro(libroNuevo)){
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-                        "El libro guardado correctamente",
-                        "Sólo espera a que sea aceptado");
+                        "El libro guardado correctamente","");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             }else{
                 throw new Exception("No se ha podido registrar el libro");

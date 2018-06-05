@@ -19,17 +19,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
  * @author boozh
  */
 public class LibroDAO {
-    private final String SQL_SELECT_REGISTRAR_LIBRO_PORTADA = "SELECT librocol from libro;";
+    private final String SQL_SELECT_REGISTRAR_LIBRO_PORTADA = "INSERT INTO libro (libro_col) values (?);";
     private final String SQL_SELECT_ID = "SELECT * from libro where idlibro=?;";
     private final String SQL_SELECT_LIBROS_DISPONIBLES = "select * from libro join autor on libro_idautor = idautor join pais on autor_idpais = idpais;";
     private final String SQL_SELECT_CATEGORIA = "SELECT * from libro where libro_categoria=?;";
-    private final String SQL_INSERT_REGISTRAR_LIBRO = "INSERT INTO libro (libro_sku,libro_titulo,libro_idautor, librocol, libro_categoria) VALUES (?,?,?,?,?);"; 
+    private final String SQL_INSERT_REGISTRAR_LIBRO = "INSERT INTO libro (libro_sku,libro_titulo,libro_idautor, libro_categoria) VALUES (?,?,?,?);"; 
         
     public boolean registrarLibro(LibroDTO libro) throws Exception{
         Connection con = null; 
@@ -40,28 +41,28 @@ public class LibroDAO {
             st.setString(1, libro.getSku());
             st.setString(2, libro.getTitulo());
             st.setInt(3, libro.getIdautor());
-            st.setString(5, libro.getCategoria());
-            try(InputStream input = libro.getLibrocol().getInputStream()){
-            String imgpath = "/resources/portadas/";
-            if (!Files.exists(Paths.get(imgpath)))
+            st.setString(4, libro.getCategoria());
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                        try(InputStream input = libro.getLibrocol().getInputStream()){
+                            String imgpath = "/resources/portadas/";
+                            if (!Files.exists(Paths.get(imgpath)))
                                 Files.createDirectories(Paths.get(imgpath));
-            imgpath+=libro.getTitulo()+".jpg";
-            File portada= new File(imgpath);
-           /* try {                    
-                                FileUtils.copyInputStreamToFile(input, portada);
+                            imgpath += rs.getLong(1)+".jpg";
+                            File destFile = new File(imgpath);
+                            try {                    
+                                FileUtils.copyInputStreamToFile(input, destFile);
                             } catch (Exception e) {
                                 throw e; 
-                            }*/
-            //FileInputStream portada_ = new FileInputStream(portada);
-            st.setBinaryStream(4, input,(int)portada.length() );
-           // st.setString(4,imgpath);
-            st.executeUpdate();
-           /* }catch(Exception ex){
+                            }
+                            st = con.prepareStatement(SQL_SELECT_REGISTRAR_LIBRO_PORTADA);
+                            st.setString(1, imgpath+rs.getLong(1));
+                            return st.executeUpdate()>0; }
+                        catch(Exception ex){
                             throw ex; 
-           
-*/        
-                        }
+                        }}
         }catch(Exception ex){
+            System.out.println(ex);
             throw ex; 
         }finally{
             try{

@@ -66,16 +66,7 @@ public class UserBean implements Serializable {
         libroDAO_ = new LibroDAO();
         librosDisponibles = new ArrayList<>();
 
-        Integer idusuario = (Integer) FacesContext.getCurrentInstance()
-                .getExternalContext().getSessionMap().get("idusuario");
-        try {
-            if (idusuario == null) {
-                ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-                context.getFlash().setKeepMessages(true);
-                context.redirect(context.getRequestContextPath() + "/");
-            }
-        } catch (Exception ex) {
-        }
+        validarUsuarioLogueado(); 
 
         cargarLibrosDisponibles();
     }
@@ -254,6 +245,18 @@ public class UserBean implements Serializable {
 
     public void setLibroEnConsulta(LibroDTO libroEnConsulta) {
         this.libroEnConsulta = libroEnConsulta;
+    }
+
+    public void validarUsuarioLogueado() {
+        Integer idusuario = (Integer) FacesContext.getCurrentInstance()
+                .getExternalContext().getSessionMap().get("idusuario");
+        try {
+            if (idusuario == null) {
+                ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+                context.getFlash().setKeepMessages(true);
+                context.redirect(context.getRequestContextPath() + "/");
+            }
+        } catch (Exception ex) {}
     }
 
 }

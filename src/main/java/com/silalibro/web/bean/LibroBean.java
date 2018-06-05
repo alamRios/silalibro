@@ -1,11 +1,14 @@
 package com.silalibro.web.bean;
 import com.silalibro.dao.LibroDAO;
 import com.silalibro.dto.LibroDTO;
+import java.io.File;
+import java.io.InputStream;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -26,6 +29,18 @@ public class LibroBean {
     public void registrarLibro(){
         try{
             if(libroDAO_.registrarLibro(libroNuevo)){
+                String imgpath = "resources/portadas/"+libroNuevo.getTitulo().trim()+".png";
+                try (InputStream input = libroNuevo.getLibrocol().getInputStream()) {
+                    File destFile = new File(imgpath);
+                    try {
+                        FileUtils.copyInputStreamToFile(input, destFile);
+                    } catch (Exception e) {
+                        throw e;
+                    }
+                } catch (Exception ex) {
+                    throw ex;
+                }
+                
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
                         "Libro guardado correctamente","");
                 FacesContext.getCurrentInstance().addMessage(null, msg);

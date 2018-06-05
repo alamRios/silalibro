@@ -58,22 +58,25 @@
                 </div>
             </div>
         </div> 
-        <div class="row">
-            <p:repeat var="libro" value="#{userBean.librosDisponibles}" >
-                <div class="col-sm-3">
-                    <div class="card">
-                        <h:graphicImage class="card-img-top" width="200" value="#{libro.rutaLibro}" />
-                        <div class="card-body">
-                            <h4 class="card-title">#{libro.autor.nombreCompleto}</h4>
-                            <a href="informacion/informacion1.xhtml" class="btn btn-primary">Más información</a>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-primary">Rentar</a>
-                            <a href="#" class="btn btn-primary">Comprar</a>
+        <h:form>
+            <div class="row">
+                <p:repeat var="libro" value="#{userBean.librosDisponibles}" >
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <h:graphicImage class="card-img-top" width="200" value="#{libro.rutaLibro}" />
+                            <div class="card-body">
+                                <h4 class="card-title">#{libro.titulo}</h4>
+                                De: <b>#{libro.autor.nombreCompleto}</b>
+                            </div>
+                            <div class="card-footer">
+                                <h:commandButton class="btn btn-primary" value="Más información">
+                                    <f:param name="libroId" value="#{libro.idlibro}"/>
+                                </h:commandButton>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </p:repeat>            
-        </div>
+                </p:repeat>            
+            </div>
+        </h:form>
     </ui:define>
 </ui:composition>

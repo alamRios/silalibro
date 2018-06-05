@@ -59,6 +59,25 @@ public class AutorBean {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
+    
+    public void registrarAutor(){
+        try{
+            if(autorDAO_.insertarOActualizarAutor(autorNuevo)){
+                cargarAutores();
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "Autor registrado",
+                    "El autor ha sido registrado correctamente");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }else{
+                throw new Exception("No se ha registrado autor"); 
+            }
+        }catch(Exception ex){
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Ha ocurrido un error",
+                    ex.toString());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
 
     public AutorDTO getAutorNuevo() {
         return autorNuevo;

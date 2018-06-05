@@ -10,6 +10,7 @@ import com.silalibro.utils.Conection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,9 @@ import java.util.List;
 public class AutorDAO {
     private final String SQL_OBTENER_AUTORES = 
             "select * from autor join pais on autor_idpais = idpais"; 
+    private String SQL_INSERT_AUTOR = 
+            "insert into autor(autor_nombre,autor_apellidoPaterno,autor_apellidoMaterno,autor_idpais) values (?,?,?,?)";
+    private String SQL_UPDATE_AUTOR;
     
     public List<AutorDTO> obtenerAutores() throws Exception{
         List<AutorDTO> autores = new ArrayList<>(); 
@@ -54,5 +58,40 @@ public class AutorDAO {
             }
         }
         return autores; 
+    }
+
+    public boolean insertarOActualizarAutor(AutorDTO autor) throws Exception{
+        PreparedStatement st = null;
+        Connection con = null;
+        ResultSet rs = null;
+        try {
+            con = Conection.obtenerConeccion();
+            if(autor.getIdautor() == 0)
+                st = con.prepareStatement(SQL_INSERT_AUTOR);
+            else
+                st = con.prepareStatement(SQL_UPDATE_AUTOR);
+            st.setString(1,autor.getNombre());
+            st.setString(2,autor.getApellidoPaterno());
+            st.setString(3,autor.getAppellidoMaterno());
+            st.setInt(4,autor.getIdPais());
+            return st.executeUpdate() != 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                throw ex;
+            }
+        }
     }
 }

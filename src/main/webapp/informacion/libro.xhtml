@@ -27,10 +27,17 @@
                         <h4 class="card-title">#{userBean.libroEnConsulta.titulo}</h4>
                         De: <b>#{userBean.libroEnConsulta.autor.nombreCompleto}</b>
                     </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Rentar</a>
-                        <a href="#" class="btn btn-primary">Comprar</a>
-                    </div>
+                    <ui:fragment rendered="#{userBean.usuario != null}">
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Rentar</a>
+                            <a href="#" class="btn btn-primary">Comprar</a>
+                        </div>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{userBean.usuario == null}">
+                        <div class="card-footer">
+                            Inicia sesión para poder rentar o comprar este libro
+                        </div>
+                    </ui:fragment>
                 </div>
             </div>
             <div class="col-8">

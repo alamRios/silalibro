@@ -94,5 +94,48 @@
             <br/>
             <br/>
         </div>
+        
+        <div class="modal fade" tabindex="-1" role="dialog" 
+             aria-labelledby="modalIniciarSesion" id="modalIniciarSesion">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Iniciar sesión</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h:form id="formInicioSesion">
+                            <div class="container">
+                                <ui:fragment rendered="#{userBean.credencialesIncorrectas}">
+                                    <div class="alert alert-danger" role="alert">
+                                        Credenciales incorrectas
+                                    </div>
+                                </ui:fragment>
+                                <div class="form-group">
+                                    <label for="txtCorreo">Correo:</label>
+                                    <h:inputText id="txtCorreo" value="#{userBean.correo_usr}" 
+                                                 class="form-control"/>
+                                </div>
+                                <div>
+                                    <label for="txtContrasena">Contraseña</label>
+                                    <h:inputSecret id="txtContrasena" value="#{userBean.passwd_usr}" 
+                                                   class="form-control"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="float-right">
+                                <h:commandButton class="btn btn-success" 
+                                                 action="#{userBean.iniciarSesion}" value="Iniciar sesión">
+                                </h:commandButton>
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div> 
     </body>
 </html>

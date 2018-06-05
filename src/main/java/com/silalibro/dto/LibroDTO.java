@@ -1,30 +1,42 @@
-
 package com.silalibro.dto;
 
-
+import static com.sun.faces.facelets.util.Path.context;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.servlet.http.Part;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
  * @author boozh
  */
 public class LibroDTO {
-    private int idlibro; 
+
+    private int idlibro;
     private String titulo;
-    private String sku; 
+    private String sku;
     private int idautor;
-    private Part librocol; 
-    private AutorDTO autor; 
+    private Part librocol;
+    private AutorDTO autor;
     private String rutaLibro;
     private String categoria;
-    public LibroDTO(){
-        this.idlibro = 0; 
-        this.titulo = ""; 
-        this.sku = ""; 
+
+    public LibroDTO() {
+        this.idlibro = 0;
+        this.titulo = "";
+        this.sku = "";
         this.idautor = 0;
         this.categoria = "";
-        autor = new AutorDTO(); 
+        autor = new AutorDTO();
     }
+
+    
 
     public String getCategoria() {
         return categoria;
@@ -33,9 +45,9 @@ public class LibroDTO {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    
-    public LibroDTO(String titulo){
-        this.titulo = titulo; 
+
+    public LibroDTO(String titulo) {
+        this.titulo = titulo;
     }
 
     public int getIdlibro() {
@@ -93,7 +105,7 @@ public class LibroDTO {
     public void setRutaLibro(String rutaLibro) {
         this.rutaLibro = rutaLibro;
     }
-    
+
     @Override
     public String toString() {
         return "LibroDTO{" + "idlibro=" + idlibro + ", titulo=" + titulo + ", sku=" + sku + ", idautor=" + idautor + ", librocol=" + librocol + ", autor=" + autor + '}';

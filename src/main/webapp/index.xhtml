@@ -23,7 +23,10 @@
                           step="1" varStatus="libroStatus">
                     <div class="col-sm-3">
                         <div class="card">
-                            <h:graphicImage class="card-img-top" width="200" value="#{libro.rutaLibro}" />
+                            <p:graphicImage class="card-img-top" width="200" value="#{userBean.portadaLibro}">
+                                <f:param name="tituloLibro" value="#{libro.titulo.trim()}"/>
+                                <f:param name="rutaLibro" value="#{libro.rutaLibro}"/>
+                            </p:graphicImage>
                             <div class="card-body">
                                 <h4 class="card-title">#{libro.titulo}</h4>
                                 De: <b>#{libro.autor.nombreCompleto}</b>

@@ -10,6 +10,9 @@ import com.silalibro.dao.LibroDAO;
 import com.silalibro.dao.UsuarioDAO;
 import com.silalibro.dto.LibroDTO;
 import com.silalibro.dto.UsuarioDTO;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -74,6 +80,18 @@ public class UserBean implements Serializable {
         cargarLibrosDisponibles();
     }
 
+    public StreamedContent getPortadaLibro() throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            return new DefaultStreamedContent();
+        } else {
+            String rutaLibro = context.getExternalContext().getRequestParameterMap().get("rutaLibro"); 
+            String tituloLibro = context.getExternalContext().getRequestParameterMap().get("tituloLibro");
+            return new DefaultStreamedContent(new FileInputStream(new File(rutaLibro, tituloLibro + ".png")));
+        }
+    }
+
     public void cargarLibrosDisponibles() {
         try {
             librosDisponibles = libroDAO_.obtenerLibrosDisponibles();
@@ -92,7 +110,7 @@ public class UserBean implements Serializable {
             ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
             context.getFlash().setKeepMessages(true);
             context.redirect(context.getRequestContextPath() + "/informacion/libro.xhtml");
-        }catch(Exception ex){
+        } catch (Exception ex) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "Ha ocurrido un error",
                     ex.toString());

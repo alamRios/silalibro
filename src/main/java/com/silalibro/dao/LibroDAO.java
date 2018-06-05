@@ -19,6 +19,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -31,7 +33,8 @@ public class LibroDAO {
     private final String SQL_SELECT_LIBROS_DISPONIBLES = "select * from libro join autor on libro_idautor = idautor join pais on autor_idpais = idpais;";
     private final String SQL_SELECT_CATEGORIA = "SELECT * from libro where libro_categoria=?;";
     private final String SQL_INSERT_REGISTRAR_LIBRO = "INSERT INTO libro (libro_sku,libro_titulo,libro_idautor, libro_categoria, librocol) VALUES (?,?,?,?,?);";
-
+    ServletContext servletContext = (ServletContext) FacesContext
+    .getCurrentInstance().getExternalContext().getContext();
     public boolean registrarLibro(LibroDTO libro) throws Exception {
         Connection con = null;
         PreparedStatement st = null;
@@ -42,10 +45,11 @@ public class LibroDAO {
             st.setString(2, libro.getTitulo());
             st.setInt(3, libro.getIdautor());
             st.setString(4, libro.getCategoria());
-            String imgpath = "resources/portadas/"+libro.getTitulo().trim()+".png";
+            String imgpath = "c://resources/portadas";
             st.setString(5, imgpath);
             if (st.executeUpdate() > 0) {
                 try (InputStream input = libro.getLibrocol().getInputStream()) {
+                    imgpath += "/"+libro.getTitulo().trim()+".png";
                     File destFile = new File(imgpath);
                     try {
                         FileUtils.copyInputStreamToFile(input, destFile);

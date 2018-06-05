@@ -23,10 +23,13 @@ public class UsuarioDAO {
     private static final String SQL_INSERT_DIR = "INSERT INTO direccion(direccion_calle, direccion_numeroExterior,"
             + "direccion_numeroInterior, direccion_cp, direccion_colonia, direccion_municipio, direccion_estado)"
             + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+    
+    //parametros: usuario(1-6 y 11) idDireccion(7-10)
     private static final String SQL_INSERT_USUARIO = "INSERT INTO usuario (usuario_email, usuario_pass, usuario_nombre, "
             + "usuario_apellidoMaterno, usuario_apellidoPaterno, usuario_fechaNacimiento, idDireccion,"
-            + "usuario_administrador) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            + "usuario_administrador) VALUES (?, ?, ?, ?, ?, ?, (SELECT iddireccion FROM direccion "
+            + "WHERE direccion_calle = ? and direccion_numeroExterior = ? and direccion_numeroInterior = ? "
+            + "and direccion_cp = ?), ?);";
 
     public UsuarioDTO iniciarSesion(String correo, String contra) throws Exception{
         UsuarioDTO usuario = null; 
@@ -98,8 +101,11 @@ public class UsuarioDAO {
             st.setString(4, nvousuario.getApellidoMaterno());
             st.setString(5, nvousuario.getApellidoPaterno());
             st.setDate(6,new Date(nvousuario.getFechaNacimiento().getTime()));
-            st.setInt(7, 1);
-            st.setBoolean(8, nvousuario.isAdministrador());
+            st.setString(7, nvousuario.getDireccion().getCalle());
+            st.setInt(8, nvousuario.getDireccion().getNumeroExterior());
+            st.setInt(9, nvousuario.getDireccion().getNumeroInterior());
+            st.setString(10, nvousuario.getDireccion().getCP());
+            st.setBoolean(11, nvousuario.isAdministrador());
             st.executeUpdate();
         } catch (SQLException ex) {
             throw ex;

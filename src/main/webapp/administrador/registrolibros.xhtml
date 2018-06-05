@@ -4,8 +4,12 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 template="../WEB-INF/layout.xhtml">
+    <ui:define name="headStyles">
+        <link rel="stylesheet" href="../css/colors.css"/>
+    </ui:define>
     <ui:define name="header">
     </ui:define>
+    <ui:define name="jquery"></ui:define>
     
     <ui:define name="logo">
         <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/administrador/index.xhtml">
@@ -34,6 +38,11 @@
                         <h:outputLabel value="idautor:" class="control-label col-sm-2" for="idautor"/>
                         <h:inputText id="Autor" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.idautor}" required="true"/>
                         <h:message for="idautor"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="categoria:" class="control-label col-sm-2" for="categoria"/>
+                        <h:inputText id="CATEGORIA" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.categoria}" required="true"/>
+                        <h:message for="categoria"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <label for="Portda"> Portada </label>

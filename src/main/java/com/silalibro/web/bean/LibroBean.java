@@ -27,7 +27,7 @@ public class LibroBean {
         try{
             if(libroDAO_.registrarLibro(libroNuevo)){
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-                        "El libro guardado correctamente","");
+                        "Libro guardado correctamente","");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             }else{
                 throw new Exception("No se ha podido registrar el libro");

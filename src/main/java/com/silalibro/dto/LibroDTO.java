@@ -2,9 +2,7 @@
 package com.silalibro.dto;
 
 
-import com.silalibro.dto.LibroDTO.*;
 import javax.servlet.http.Part;
-import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -17,14 +15,23 @@ public class LibroDTO {
     private int idautor;
     private Part librocol; 
     private AutorDTO autor; 
-    private String rutaLibro; 
-    
+    private String rutaLibro;
+    private String categoria;
     public LibroDTO(){
         this.idlibro = 0; 
         this.titulo = ""; 
         this.sku = ""; 
         this.idautor = 0;
+        this.categoria = "";
         autor = new AutorDTO(); 
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
     
     public LibroDTO(String titulo){

@@ -4,7 +4,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 template="../WEB-INF/layout.xhtml">
-    
+
     <ui:define name="headStyles">
         <link rel="stylesheet" href="../css/colors.css"/>
     </ui:define>
@@ -22,7 +22,10 @@
         <div class="row">
             <div class="col-4">
                 <div class="card">
-                    <h:graphicImage class="card-img-top" width="200" value="../#{userBean.libroEnConsulta.rutaLibro}" />
+                    <p:graphicImage class="card-img-top" width="200" value="#{userBean.portadaLibro}">
+                        <f:param name="tituloLibro" value="#{userBean.libroEnConsulta.titulo.trim()}"/>
+                        <f:param name="rutaLibro" value="#{userBean.libroEnConsulta.rutaLibro}"/>
+                    </p:graphicImage>
                     <div class="card-body">
                         <h4 class="card-title">#{userBean.libroEnConsulta.titulo}</h4>
                         De: <b>#{userBean.libroEnConsulta.autor.nombreCompleto}</b>

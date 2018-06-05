@@ -36,18 +36,17 @@
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="idautor:" class="control-label col-sm-2" for="idautor"/>
-                        <h:inputText id="Autor" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.idautor}" required="true"/>
+                        <h:inputText id="idautor" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.idautor}" required="true"/>
                         <h:message for="idautor"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="categoria:" class="control-label col-sm-2" for="categoria"/>
-                        <h:inputText id="CATEGORIA" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.categoria}" required="true"/>
+                        <h:inputText id="categoria" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.categoria}" required="true"/>
                         <h:message for="categoria"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
-                        <label for="Portda"> Portada </label>
-                        <h:inputFile class="form-control" id="ifFotos"
-                                     value="#{libroBean.libroNuevo.librocol}"></h:inputFile>
+                        <label for="Portada"> Portada:  </label>
+                        <h:inputFile class="form-control" id="Portada" value="#{libroBean.libroNuevo.librocol}"></h:inputFile>
                     </div> 
                 </div>
                 

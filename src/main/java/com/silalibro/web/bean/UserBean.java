@@ -6,9 +6,13 @@
 package com.silalibro.web.bean;
 
 import com.silalibro.dao.CuentaDAO;
+import com.silalibro.dao.LibroDAO;
 import com.silalibro.dao.UsuarioDAO;
+import com.silalibro.dto.LibroDTO;
 import com.silalibro.dto.UsuarioDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -27,10 +31,12 @@ public class UserBean implements Serializable {
     /* DAO */
     private UsuarioDAO usuarioDAO_;
     private CuentaDAO cuentaDAO_;
+    private LibroDAO libroDAO_; 
 
     /* GLOBAL VARIABLES */
     private String mensaje;
     private UsuarioDTO usuario, nvousuario;
+    private List<LibroDTO> librosDisponibles; 
 
     /* LOGIN VARIABLES */
     private String correo_usr;
@@ -50,6 +56,9 @@ public class UserBean implements Serializable {
         usuarioDAO_ = new UsuarioDAO();
         nvousuario = new UsuarioDTO();
         cuentaDAO_ = new CuentaDAO(); 
+        libroDAO_ = new LibroDAO();
+        librosDisponibles = new ArrayList<>();
+        
         Integer idusuario = (Integer) FacesContext.getCurrentInstance()
                 .getExternalContext().getSessionMap().get("idusuario");
         try {
@@ -58,7 +67,20 @@ public class UserBean implements Serializable {
                 context.getFlash().setKeepMessages(true);
                 context.redirect(context.getRequestContextPath() + "/");
             }
+        } catch (Exception ex) {}
+        
+        cargarLibrosDisponibles();
+    }
+    
+    public void cargarLibrosDisponibles(){
+        try {
+            librosDisponibles = libroDAO_.obtenerLibrosDisponibles(); 
         } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Ha ocurrido un error",
+                    ex.toString());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
 
@@ -128,22 +150,6 @@ public class UserBean implements Serializable {
 
     }
 
-    public UsuarioDAO getUsuarioDAO_() {
-        return usuarioDAO_;
-    }
-
-    public void setUsuarioDAO_(UsuarioDAO usuarioDAO_) {
-        this.usuarioDAO_ = usuarioDAO_;
-    }
-
-    public CuentaDAO getCuentaDAO_() {
-        return cuentaDAO_;
-    }
-
-    public void setCuentaDAO_(CuentaDAO cuentaDAO_) {
-        this.cuentaDAO_ = cuentaDAO_;
-    }
-
     public UsuarioDTO getNvousuario() {
         return nvousuario;
     }
@@ -200,4 +206,13 @@ public class UserBean implements Serializable {
         this.passwd_nvo = passwd_nvo;
     }
 
+    public List<LibroDTO> getLibrosDisponibles() {
+        return librosDisponibles;
+    }
+
+    public void setLibrosDisponibles(List<LibroDTO> librosDisponibles) {
+        this.librosDisponibles = librosDisponibles;
+    }
+
+    
 }

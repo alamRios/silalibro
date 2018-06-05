@@ -15,8 +15,9 @@ public class LibroDTO {
     private String titulo;
     private String sku; 
     private int idautor;
-    private Part librocol ; 
+    private Part librocol; 
     private AutorDTO autor; 
+    private String rutaLibro; 
     
     public LibroDTO(){
         this.idlibro = 0; 
@@ -70,15 +71,24 @@ public class LibroDTO {
         this.librocol = librocol;
     }
 
+    public AutorDTO getAutor() {
+        return autor;
+    }
+
+    public void setAutor(AutorDTO autor) {
+        this.autor = autor;
+    }
+
+    public String getRutaLibro() {
+        return rutaLibro;
+    }
+
+    public void setRutaLibro(String rutaLibro) {
+        this.rutaLibro = rutaLibro;
+    }
+    
     @Override
     public String toString() {
         return "LibroDTO{" + "idlibro=" + idlibro + ", titulo=" + titulo + ", sku=" + sku + ", idautor=" + idautor + ", librocol=" + librocol + ", autor=" + autor + '}';
     }
-
-
-
-
-
-
-   
 }

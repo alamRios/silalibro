@@ -22,9 +22,10 @@
         <div class="row">
             <div class="col-4">
                 <div class="card">
-                    <img class="card-img-top" src="https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-1-495x750.jpg" alt=""></img>
+                    <h:graphicImage class="card-img-top" width="200" value="../#{userBean.libroEnConsulta.rutaLibro}" />
                     <div class="card-body">
-                        <h4 class="card-title">The brief history of the dead</h4>
+                        <h4 class="card-title">#{userBean.libroEnConsulta.titulo}</h4>
+                        De: <b>#{userBean.libroEnConsulta.autor.nombreCompleto}</b>
                     </div>
                     <div class="card-footer">
                         <a href="#" class="btn btn-primary">Rentar</a>

@@ -60,7 +60,9 @@
         </div> 
         <h:form>
             <div class="row">
-                <p:repeat var="libro" value="#{userBean.librosDisponibles}" >
+                <p:repeat var="libro" value="#{userBean.librosDisponibles}" 
+                          offset="0" size="#{userBean.librosDisponibles.size()}" 
+                          step="1" varStatus="libroStatus">
                     <div class="col-sm-3">
                         <div class="card">
                             <h:graphicImage class="card-img-top" width="200" value="#{libro.rutaLibro}" />
@@ -69,9 +71,7 @@
                                 De: <b>#{libro.autor.nombreCompleto}</b>
                             </div>
                             <div class="card-footer">
-                                <h:commandButton class="btn btn-primary" value="Más información">
-                                    <f:param name="libroId" value="#{libro.idlibro}"/>
-                                </h:commandButton>
+                                <h:commandButton class="btn btn-primary" action="#{userBean.consultarLibroSeleccionado(libro)}" value="Más información" />
                             </div>
                         </div>
                     </div>

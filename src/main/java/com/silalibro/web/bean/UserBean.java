@@ -31,21 +31,22 @@ public class UserBean implements Serializable {
     /* DAO */
     private UsuarioDAO usuarioDAO_;
     private CuentaDAO cuentaDAO_;
-    private LibroDAO libroDAO_; 
+    private LibroDAO libroDAO_;
 
     /* GLOBAL VARIABLES */
     private String mensaje;
     private UsuarioDTO usuario, nvousuario;
-    private List<LibroDTO> librosDisponibles; 
+    private List<LibroDTO> librosDisponibles;
+    private LibroDTO libroEnConsulta;
 
     /* LOGIN VARIABLES */
     private String correo_usr;
     private String passwd_usr;
     private boolean credencialesIncorrectas;
-    
+
     /* REGISTRO VARIABLES */
-    private String passwd_nvo; 
-    
+    private String passwd_nvo;
+
     public UserBean() {
     }
 
@@ -55,10 +56,10 @@ public class UserBean implements Serializable {
         credencialesIncorrectas = false;
         usuarioDAO_ = new UsuarioDAO();
         nvousuario = new UsuarioDTO();
-        cuentaDAO_ = new CuentaDAO(); 
+        cuentaDAO_ = new CuentaDAO();
         libroDAO_ = new LibroDAO();
         librosDisponibles = new ArrayList<>();
-        
+
         Integer idusuario = (Integer) FacesContext.getCurrentInstance()
                 .getExternalContext().getSessionMap().get("idusuario");
         try {
@@ -67,16 +68,31 @@ public class UserBean implements Serializable {
                 context.getFlash().setKeepMessages(true);
                 context.redirect(context.getRequestContextPath() + "/");
             }
-        } catch (Exception ex) {}
-        
+        } catch (Exception ex) {
+        }
+
         cargarLibrosDisponibles();
     }
-    
-    public void cargarLibrosDisponibles(){
+
+    public void cargarLibrosDisponibles() {
         try {
-            librosDisponibles = libroDAO_.obtenerLibrosDisponibles(); 
+            librosDisponibles = libroDAO_.obtenerLibrosDisponibles();
         } catch (Exception ex) {
             ex.printStackTrace();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Ha ocurrido un error",
+                    ex.toString());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+
+    public void consultarLibroSeleccionado(LibroDTO libro) {
+        libroEnConsulta = libro;
+        try {
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            context.getFlash().setKeepMessages(true);
+            context.redirect(context.getRequestContextPath() + "/informacion/libro.xhtml");
+        }catch(Exception ex){
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "Ha ocurrido un error",
                     ex.toString());
@@ -108,7 +124,7 @@ public class UserBean implements Serializable {
                     context.getFlash().setKeepMessages(true);
                     context.redirect(context.getRequestContextPath() + "/administrador/index.xhtml");
                 }
-                credencialesIncorrectas = false; 
+                credencialesIncorrectas = false;
             } else {
                 credencialesIncorrectas = true;
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -139,7 +155,7 @@ public class UserBean implements Serializable {
 
     public void agregarUsuario() {
         try {
-            usuarioDAO_.create(nvousuario,passwd_nvo);
+            usuarioDAO_.create(nvousuario, passwd_nvo);
         } catch (Exception ex) {
             ex.printStackTrace();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -214,5 +230,12 @@ public class UserBean implements Serializable {
         this.librosDisponibles = librosDisponibles;
     }
 
-    
+    public LibroDTO getLibroEnConsulta() {
+        return libroEnConsulta;
+    }
+
+    public void setLibroEnConsulta(LibroDTO libroEnConsulta) {
+        this.libroEnConsulta = libroEnConsulta;
+    }
+
 }

@@ -37,6 +37,7 @@ public class AutorDAO {
             
             while(rs.next()){
                 AutorDTO autor = new AutorDTO(); 
+                autor.setIdautor(rs.getInt("idautor"));
                 autor.setApellidoPaterno(rs.getString("autor_apellidoPaterno"));
                 autor.setAppellidoMaterno(rs.getString("autor_apellidoMaterno"));
                 autor.setNombre(rs.getString("autor_nombre"));

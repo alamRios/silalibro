@@ -42,23 +42,16 @@ public class LibroDAO {
             st.setString(2, libro.getTitulo());
             st.setInt(3, libro.getIdautor());
             st.setString(4, libro.getCategoria());
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
+            String imgpath = "resources/portadas/"+libro.getTitulo().trim()+".png";
+            st.setString(5, imgpath);
+            if (st.executeUpdate() > 0) {
                 try (InputStream input = libro.getLibrocol().getInputStream()) {
-                    String imgpath = "resources/portadas/";
-                    if (!Files.exists(Paths.get(imgpath))) {
-                        Files.createDirectories(Paths.get("../"+imgpath));
-                    }
-                    imgpath += rs.getLong(1) + ".jpg";
                     File destFile = new File(imgpath);
                     try {
                         FileUtils.copyInputStreamToFile(input, destFile);
                     } catch (Exception e) {
                         throw e;
                     }
-                    
-                    st.setString(5, imgpath + rs.getLong(1));
-                    return st.executeUpdate() > 0;
                 } catch (Exception ex) {
                     throw ex;
                 }

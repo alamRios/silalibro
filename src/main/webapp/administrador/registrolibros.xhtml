@@ -4,19 +4,22 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 template="../WEB-INF/layout.xhtml">
+    <f:metadata>
+        <f:viewAction action="#{autorBean.cargarAutores}" />
+    </f:metadata>
     <ui:define name="headStyles">
         <link rel="stylesheet" href="../css/colors.css"/>
     </ui:define>
     <ui:define name="header">
     </ui:define>
     <ui:define name="jquery"></ui:define>
-    
+
     <ui:define name="logo">
         <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/administrador/index.xhtml">
             <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
         </a>
     </ui:define>
-    
+
     <ui:define name="content">
         <h1 class="text-center">Registro de libros</h1>
         <br/>
@@ -36,7 +39,12 @@
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="idautor:" class="control-label col-sm-2" for="idautor"/>
-                        <h:inputText id="Autor" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.idautor}" required="true"/>
+                        <h:selectOneMenu class="form-control col-sm-9 offset-sm-1" 
+                                         id="Autor" value="#{libroBean.libroNuevo.idautor}">
+                            <f:selectItems value="#{autorBean.autores}" 
+                                           var="autor" itemLabel="#{autor.nombreCompleto}" 
+                                           itemValue="#{autor.idautor}"/>
+                        </h:selectOneMenu>
                         <h:message for="idautor"/>
                     </div>
                     <div class="form-group form-inline col-md-12">
@@ -50,15 +58,15 @@
                                      value="#{libroBean.libroNuevo.librocol}"></h:inputFile>
                     </div> 
                 </div>
-                
-                </div>
-                <div class="clearfix visible-md-block"></div>
-          
+
+            </div>
+            <div class="clearfix visible-md-block"></div>
+
             <br/>
             <div class="row">
                 <h:commandButton class="btn btn-lg btn-success btn-block"
-                                   actionListener="#{libroBean.registrarLibro}"
-                                   value="Registrar Libro"></h:commandButton>
+                                 actionListener="#{libroBean.registrarLibro}"
+                                 value="Registrar Libro"></h:commandButton>
             </div>
         </h:form>
     </ui:define>

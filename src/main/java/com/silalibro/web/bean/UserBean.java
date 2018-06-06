@@ -165,6 +165,7 @@ public class UserBean implements Serializable {
     public void agregarUsuario() {
         try {
             usuarioDAO_.create(nvousuario, passwd_nvo);
+             FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
         } catch (Exception ex) {
             ex.printStackTrace();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,

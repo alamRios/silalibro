@@ -49,7 +49,14 @@
                     </div>
                     <div class="form-group form-inline col-md-12">
                         <h:outputLabel value="categoria:" class="control-label col-sm-2" for="categoria"/>
-                        <h:inputText id="categoria" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.categoria}" required="true"/>
+                        <h:selectOneMenu  id="categoria" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.categoria}" required="true">
+                            <f:selectItem itemValue = "Literatura" itemLabel = "Literatura" /> 
+                            <f:selectItem itemValue = "Arte" itemLabel = "Arte" /> 
+                            <f:selectItem itemValue = "Ciencia" itemLabel = "Ciencia" /> 
+                            <f:selectItem itemValue = "Economia" itemLabel = "Economia" /> 
+                            <f:selectItem itemValue = "Tecnologia" itemLabel = "Tecnologia" />
+                            <f:selectItem itemValue = "Matematicas" itemLabel = "Matematicas" />
+                        </h:selectOneMenu>
                         <h:message for="categoria"/>
                     </div>
                     <div class="form-group form-inline col-md-12">

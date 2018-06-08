@@ -1,16 +1,6 @@
 package com.silalibro.dto;
 
-import static com.sun.faces.facelets.util.Path.context;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
 import javax.servlet.http.Part;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 /**
  *

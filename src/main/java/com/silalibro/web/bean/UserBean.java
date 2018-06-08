@@ -41,8 +41,10 @@ public class UserBean implements Serializable {
 
     /* GLOBAL VARIABLES */
     private String mensaje;
+    private String categoria;
     private UsuarioDTO usuario, nvousuario;
     private List<LibroDTO> librosDisponibles;
+    private List<LibroDTO> librosDisponiblesCategoria;
     private LibroDTO libroEnConsulta;
 
     /* LOGIN VARIABLES */
@@ -58,6 +60,7 @@ public class UserBean implements Serializable {
 
     @PostConstruct
     public void setup() {
+        categoria="";
         mensaje = "Bienvenido a Silalibro";
         credencialesIncorrectas = false;
         usuarioDAO_ = new UsuarioDAO();
@@ -65,10 +68,19 @@ public class UserBean implements Serializable {
         cuentaDAO_ = new CuentaDAO();
         libroDAO_ = new LibroDAO();
         librosDisponibles = new ArrayList<>();
+        librosDisponiblesCategoria = new ArrayList<>();
 
         validarUsuarioLogueado(); 
 
         cargarLibrosDisponibles();
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public StreamedContent getPortadaLibro() throws IOException {
@@ -94,7 +106,31 @@ public class UserBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
-
+    
+    public void cargarLibrosDisponiblesCategoria() {
+        try {
+            librosDisponiblesCategoria = libroDAO_.obtenerLibrosDisponiblesCategoria(categoria);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Ha ocurrido un error",
+                    ex.toString());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+   public void consultarCategoria(String categoria_) {
+        categoria= categoria_;
+        try {
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            context.getFlash().setKeepMessages(true);
+            context.redirect(context.getRequestContextPath() + "/index_1.xhtml");
+        } catch (Exception ex) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Ha ocurrido un error",
+                    ex.toString());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
     public void consultarLibroSeleccionado(LibroDTO libro) {
         libroEnConsulta = libro;
         try {
@@ -245,6 +281,14 @@ public class UserBean implements Serializable {
 
     public void setLibroEnConsulta(LibroDTO libroEnConsulta) {
         this.libroEnConsulta = libroEnConsulta;
+    }
+
+    public List<LibroDTO> getLibrosDisponiblesCategoria() {
+        return librosDisponiblesCategoria;
+    }
+
+    public void setLibrosDisponiblesCategoria(List<LibroDTO> librosDisponiblesCategoria) {
+        this.librosDisponiblesCategoria = librosDisponiblesCategoria;
     }
 
     public void validarUsuarioLogueado() {

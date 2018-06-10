@@ -30,8 +30,9 @@
                             <div class="card-body">
                                 <h4 class="card-title">#{libro.titulo}</h4>
                                 De: <b>#{libro.autor.nombreCompleto}</b>
+                                <p>Renta = <b>$ #{libro.p_renta} MXN</b></p>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer mx-auto">
                                 <h:commandButton class="btn btn-primary" action="#{userBean.consultarLibroSeleccionado(libro)}" value="Más información" />
                             </div>
                         </div>

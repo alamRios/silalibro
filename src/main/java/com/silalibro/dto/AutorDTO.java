@@ -16,6 +16,17 @@ public class AutorDTO {
     private String nombrePais; 
     private int idautor;
 
+    public AutorDTO() {
+        this.nombre = "";
+        this.apellidoPaterno = "";
+        this.appellidoMaterno = "";
+        this.nombrePais = "";
+        this.idautor = 0;
+        this.idPais = 0;
+    }
+    
+    
+
     public int getIdautor() {
         return idautor;
     }

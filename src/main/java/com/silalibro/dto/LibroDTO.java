@@ -16,6 +16,7 @@ public class LibroDTO {
     private AutorDTO autor;
     private String rutaLibro;
     private String categoria;
+    private double p_renta; 
 
     public LibroDTO() {
         this.idlibro = 0;
@@ -24,6 +25,15 @@ public class LibroDTO {
         this.idautor = 0;
         this.categoria = "";
         autor = new AutorDTO();
+        this. p_renta = 0.00;
+    }
+
+    public double getP_renta() {
+        return p_renta;
+    }
+
+    public void setP_renta(double p_renta) {
+        this.p_renta = p_renta;
     }
 
     

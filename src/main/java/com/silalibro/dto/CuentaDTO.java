@@ -17,7 +17,7 @@ public class CuentaDTO {
     public List<MovimientoCuentaDTO> movimientos; 
     
     public CuentaDTO(){
-        totalCuenta = 0; 
+        totalCuenta = 0.00; 
         movimientos = new ArrayList<>(); 
     }
 

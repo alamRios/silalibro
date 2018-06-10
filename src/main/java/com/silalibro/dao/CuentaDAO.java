@@ -18,6 +18,22 @@ import java.sql.ResultSet;
  */
 public class CuentaDAO {
     private final String SQL_CUENTA_USUARIO_POR_ID = "select * from movimiento_cuenta where movimiento_cuenta_idusuario = ?"; 
+    private final String SQL_CARGO_RENTA = "INSERT INTO movimiento_cuenta "
+            + "(movimiento_cuenta_monto, movimiento_cuenta_cargo, movimiento_cuenta_fecha, "
+            + "movimiento_cuenta_folioTransaccion, movimiento_cuenta_idusuario) "
+            + "VALUES (?, b'0', NOW(), (SELECT COUNT(*)from movimiento_cuenta), ?);";
+    
+    private final String SQL_INSERT_TABLA_RENTA = "INSERT INTO renta"
+            + "(renta_idusuario, renta_fechaRegistro, renta_movimientoCuentaid, "
+            + "renta_montoTotal) VALUES (?, NOW(), (SELECT idmovimiento_cuenta "
+            + "from movimiento_cuenta where movimiento_cuenta_idusuario = ? and "
+            + "movimiento_cuenta_monto = ? and movimiento_cuenta_fecha = NOW() and movimiento_cuenta_cargo = b'0'), ?);";
+    
+    private final String SQL_INSERT_RENTALIBRO = "INSERT INTO rentaventa_libro"
+            + "(rentaventa_libro_idlibro, rentaventa_libro_idrentaventa, rentaventa_libro_monto)"
+            + "VALUES (?, (SELECT idrenta from renta where renta_idusuario = ? and "
+            + "renta_montoTotal = ? and renta_fechaRegistro = NOW()), ?);";
+    
     public CuentaDTO obtenerCuentaPorUsuarioId(int usuarioid) throws Exception{
         CuentaDTO cuenta = new CuentaDTO(); 
         Connection con = null; 
@@ -56,5 +72,46 @@ public class CuentaDAO {
             }
         }
         return cuenta; 
+    }
+    
+    public void cargoPorRenta(int usuarioid, double monto, int libroid) throws Exception{ 
+        Connection con = null; 
+        PreparedStatement st = null; 
+        try{
+            con = Conection.obtenerConeccion(); 
+            //insert a movimiento_cuenta como un cargo por la renta
+            st = con.prepareStatement(SQL_CARGO_RENTA);
+            st.setDouble(1, monto);
+            st.setInt(2, usuarioid);
+            st.executeUpdate();
+            /*
+            //insert a renta 
+            st = con.prepareStatement(SQL_INSERT_TABLA_RENTA);
+            st.setInt(1, usuarioid);
+            st.setInt(2, usuarioid);
+            st.setDouble(3, monto);
+            st.setDouble(4, monto);
+            st.executeUpdate();
+            
+            //insert a rentaventa_libro
+            st = con.prepareStatement(SQL_INSERT_RENTALIBRO);
+            st.setInt(1, libroid);
+            st.setInt(2, usuarioid);
+            st.setDouble(3, monto);
+            st.setDouble(4, monto);
+            */
+        }catch(Exception ex){
+            ex.printStackTrace();
+            throw ex; 
+        }finally{
+            try{
+                if(con != null)
+                    con.close();
+                if(st != null)
+                    st.close();
+            }catch(Exception ex){
+                throw ex; 
+            }
+        }
     }
 }

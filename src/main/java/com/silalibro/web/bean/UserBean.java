@@ -60,7 +60,7 @@ public class UserBean implements Serializable {
 
     @PostConstruct
     public void setup() {
-        categoria="";
+        categoria = "";
         mensaje = "Bienvenido a Silalibro";
         credencialesIncorrectas = false;
         usuarioDAO_ = new UsuarioDAO();
@@ -70,7 +70,7 @@ public class UserBean implements Serializable {
         librosDisponibles = new ArrayList<>();
         librosDisponiblesCategoria = new ArrayList<>();
 
-        validarUsuarioLogueado(); 
+        validarUsuarioLogueado();
 
         cargarLibrosDisponibles();
     }
@@ -89,7 +89,7 @@ public class UserBean implements Serializable {
         if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
             return new DefaultStreamedContent();
         } else {
-            String rutaLibro = context.getExternalContext().getRequestParameterMap().get("rutaLibro"); 
+            String rutaLibro = context.getExternalContext().getRequestParameterMap().get("rutaLibro");
             String tituloLibro = context.getExternalContext().getRequestParameterMap().get("tituloLibro");
             return new DefaultStreamedContent(new FileInputStream(new File(rutaLibro, tituloLibro + ".png")));
         }
@@ -106,7 +106,7 @@ public class UserBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
-    
+
     public void cargarLibrosDisponiblesCategoria() {
         try {
             librosDisponiblesCategoria = libroDAO_.obtenerLibrosDisponiblesCategoria(categoria);
@@ -118,8 +118,9 @@ public class UserBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
-   public void consultarCategoria(String categoria_) {
-        categoria= categoria_;
+
+    public void consultarCategoria(String categoria_) {
+        categoria = categoria_;
         try {
             ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
             context.getFlash().setKeepMessages(true);
@@ -131,6 +132,7 @@ public class UserBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
+
     public void consultarLibroSeleccionado(LibroDTO libro) {
         libroEnConsulta = libro;
         try {
@@ -160,6 +162,7 @@ public class UserBean implements Serializable {
     public void iniciarSesion() {
         try {
             usuario = usuarioDAO_.iniciarSesion(correo_usr, passwd_usr);
+            usuario.setCuenta(cuentaDAO_.obtenerCuentaPorUsuarioId(usuario.getIdusuario()));
             if (usuario != null) {
                 FacesContext.getCurrentInstance()
                         .getExternalContext().getSessionMap().put("idusuario", usuario.getIdusuario());
@@ -192,7 +195,7 @@ public class UserBean implements Serializable {
         } catch (Exception ex) {
             ex.printStackTrace();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
-                    "Ha ocurrido un error",
+                    "Error al cargar la cuenta del usuario",
                     ex.toString());
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
@@ -201,7 +204,7 @@ public class UserBean implements Serializable {
     public void agregarUsuario() {
         try {
             usuarioDAO_.create(nvousuario, passwd_nvo);
-             FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
         } catch (Exception ex) {
             ex.printStackTrace();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -210,6 +213,28 @@ public class UserBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
 
+    }
+
+    public void rentaDeLibro() {
+        
+        double saldo, precio;
+        saldo = usuario.getCuenta().getTotalCuenta();
+        precio = libroEnConsulta.getP_renta();
+        if (saldo >= precio) {
+            try {
+                //cuentaDAO_.cargoPorRenta(usuario.getIdusuario(), libroEnConsulta.getP_renta(), libroEnConsulta.getIdlibro());
+                cargarCuentaUsuario();
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../index.xhtml");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                        "Error al momento de rentar",
+                        ex.toString());
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No tienes suficiente saldo"));
+        }
     }
 
     public UsuarioDTO getNvousuario() {
@@ -301,7 +326,8 @@ public class UserBean implements Serializable {
                 context.getFlash().setKeepMessages(true);
                 context.redirect(context.getRequestContextPath() + "/");
             }
-        } catch (Exception ex) {}
+        } catch (Exception ex) {
+        }
     }
 
 }

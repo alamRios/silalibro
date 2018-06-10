@@ -40,8 +40,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <h:form class="nav-item">
-                            <h:commandLink action="#{userBean.consultarCategoria('Cultura')}">Cultura</h:commandLink>
+                        <h:form class="btn">
+                            <h:commandLink class="text-secondary" action="#{userBean.consultarCategoria('Cultura')}">Cultura</h:commandLink>
                         </h:form>
                     </li>
                     <li class="nav-item">
@@ -51,8 +51,8 @@
                         <a class="nav-link" href="#">Matemáticas</a>
                     </li>
                     <li class="nav-item">
-                        <h:form class="nav-item">
-                            <h:commandLink action="#{userBean.consultarCategoria('Arte')}">Arte</h:commandLink>
+                        <h:form class="btn">
+                            <h:commandLink class="text-secondary" action="#{userBean.consultarCategoria('Arte')}">Arte</h:commandLink>
                         </h:form>
                     </li>
                     <li class="nav-item">
@@ -61,7 +61,7 @@
                     <li class="nav-item">
                         <input type="text" class="form-control" placeholder="Buscar libro, autor, genero..." size="25"/>
                     </li>
-                   
+
                 </ul>
                 <h:form id="formLogin">
                     <ui:insert name="uilogin">
@@ -74,12 +74,9 @@
                             </ul>
                         </ui:fragment>
                         <ui:fragment rendered="#{userBean.usuario != null}">
-                            <ul class="my-2 my-lg-0 ">
-                                <a href="#{facesContext.externalContext.requestContextPath}/usuario/cuenta.xhtml" class="btn btn-outline-primary float-right">Ver mi cuenta <i class="fa fa-user-circle" aria-hidden="true"></i></a>
-                                <br />
-                                <br />
-                                <h:commandButton value="Cerrar sesión" class="btn btn-outline-danger float-right" action="#{userBean.cerrarSesion}"/>
-                            </ul>
+                            <div class="my-1"><a href="#{facesContext.externalContext.requestContextPath}/usuario/cuenta.xhtml" class="btn btn-sm  btn-outline-primary pull-left">Ver mi cuenta <i class="fa fa-user-circle" aria-hidden="true"></i></a></div>
+                            <div class="my-1"><h:commandButton value="Cerrar sesión" class="btn btn-sm btn-outline-danger pull-left" action="#{userBean.cerrarSesion}"/></div>
+                            <div class="my-1 text-money">$#{userBean.usuario.cuenta.totalCuenta} MXN</div>
                         </ui:fragment>
                     </ui:insert>
                 </h:form>
@@ -100,7 +97,7 @@
             <br/>
             <br/>
         </div>
-        
+
         <div class="modal fade" tabindex="-1" role="dialog" 
              aria-labelledby="modalIniciarSesion" id="modalIniciarSesion">
             <div class="modal-dialog" role="document">

@@ -29,11 +29,70 @@
                     <div class="card-body">
                         <h4 class="card-title">#{userBean.libroEnConsulta.titulo}</h4>
                         De: <b>#{userBean.libroEnConsulta.autor.nombreCompleto}</b>
+                        <p>Renta = <b>$ #{userBean.libroEnConsulta.p_renta} MXN</b></p>
                     </div>
                     <ui:fragment rendered="#{userBean.usuario != null}">
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-primary">Rentar</a>
-                            <a href="#" class="btn btn-primary">Comprar</a>
+                        <div class="card-footer mx-auto">
+                            <h:form>
+                                <a href="#confirmacompra" data-toggle="modal" class="btn btn-warning mr-3">Comprar</a>
+                                <div class="modal fade" id="confirmacompra">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+
+                                                <h3 class="modal-title">¿Está seguro de querer comprar este libro?</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="fas fa-window-close"></i></span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <b>Titulo: </b>
+                                                <h:outputLabel value="#{userBean.libroEnConsulta.titulo}"/><br/>
+                                                <b>Autor: </b>
+                                                <h:outputLabel value="#{userBean.libroEnConsulta.autor.nombreCompleto}"/><br/>
+                                                <b>Precio: </b>
+                                                <h:outputLabel value="$#{userBean.libroEnConsulta.p_renta} MXN"/>
+                                            </div>
+                                            <div class="modal-footer mx-auto">
+                                                <h:commandButton value="Comprar" class="btn btn-info mr-3"/>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                                                    Cancelar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a href="#confirmarenta" data-toggle="modal" class="btn btn-warning">Rentar</a>
+                                <div class="modal fade" id="confirmarenta">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+
+                                                <h3 class="modal-title">¿Está seguro de querer rentar este libro?</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="fas fa-window-close"></i></span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <b>Titulo: </b>
+                                                <h:outputLabel value="#{userBean.libroEnConsulta.titulo}"/><br/>
+                                                <b>Autor: </b>
+                                                <h:outputLabel value="#{userBean.libroEnConsulta.autor.nombreCompleto}"/><br/>
+                                                <b>Precio: </b>
+                                                <h:outputLabel value="$#{userBean.libroEnConsulta.p_renta} MXN"/>
+                                            </div>
+                                            <div class="modal-footer mx-auto">
+                                                <h:commandButton id="rentar"  value="Rentar" actionListener="#{userBean.rentaDeLibro()}" class="btn btn-info mr-3"/>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                                                    Cancelar
+                                                </button>
+                                                <h:message for="rentar"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
                         </div>
                     </ui:fragment>
                     <ui:fragment rendered="#{userBean.usuario == null}">

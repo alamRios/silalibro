@@ -95,9 +95,10 @@ public class LibroDAO {
                 autor.setApellidoPaterno(rs.getString("autor_apellidoPaterno"));
                 autor.setAppellidoMaterno(rs.getString("autor_apellidoMaterno"));
                 libro.setAutor(autor);
-                libro.setRutaLibro(rs.getString("librocol"));
+                libro.setRutaLibro(rs.getString("libroportada"));
                 libro.setSku(rs.getString("libro_sku"));
                 libro.setTitulo(rs.getString("libro_titulo"));
+                libro.setP_renta(rs.getDouble("p_renta"));
                 libros.add(libro);
             }
         } catch (Exception ex) {

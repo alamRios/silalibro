@@ -222,9 +222,9 @@ public class UserBean implements Serializable {
         precio = libroEnConsulta.getP_renta();
         if (saldo >= precio) {
             try {
-                //cuentaDAO_.cargoPorRenta(usuario.getIdusuario(), libroEnConsulta.getP_renta(), libroEnConsulta.getIdlibro());
+                cuentaDAO_.cargoPorRenta(usuario.getIdusuario(), libroEnConsulta.getP_renta(), libroEnConsulta.getIdlibro());
                 cargarCuentaUsuario();
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../index.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("confirmacion.xhtml");
             } catch (Exception ex) {
                 ex.printStackTrace();
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,

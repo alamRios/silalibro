@@ -31,7 +31,7 @@ public class LibroDAO {
 
     private final String SQL_SELECT_LIBROS_DISPONIBLES = "select * from libro join autor on libro_idautor = idautor join pais on autor_idpais = idpais ;";
     private final String SQL_SELECT_LIBROS_DISPONIBLES_CATEGORIA = "select * from libro join autor on libro_idautor = idautor join pais on autor_idpais = idpais where libro_categoria= ?;";
-    private final String SQL_INSERT_REGISTRAR_LIBRO = "INSERT INTO libro (libro_sku,libro_titulo,libro_idautor, libro_categoria, librocol) VALUES (?,?,?,?,?);";
+    private final String SQL_INSERT_REGISTRAR_LIBRO = "INSERT INTO libro (libro_sku,libro_titulo,libro_idautor, libro_categoria, librocol, p_renta) VALUES (?,?,?,?,?,?);";
     ServletContext servletContext = (ServletContext) FacesContext
     .getCurrentInstance().getExternalContext().getContext();
     public boolean registrarLibro(LibroDTO libro) throws Exception {
@@ -46,6 +46,7 @@ public class LibroDAO {
             st.setString(4, libro.getCategoria());
             String imgpath = "c://resources/portadas";
             st.setString(5, imgpath);
+            st.setDouble(6, libro.getP_renta());
             if (st.executeUpdate() > 0) {
                 try (InputStream input = libro.getLibrocol().getInputStream()) {
                     imgpath += "/"+libro.getTitulo().trim()+".png";
@@ -95,7 +96,7 @@ public class LibroDAO {
                 autor.setApellidoPaterno(rs.getString("autor_apellidoPaterno"));
                 autor.setAppellidoMaterno(rs.getString("autor_apellidoMaterno"));
                 libro.setAutor(autor);
-                libro.setRutaLibro(rs.getString("libroportada"));
+                libro.setRutaLibro(rs.getString("librocol"));
                 libro.setSku(rs.getString("libro_sku"));
                 libro.setTitulo(rs.getString("libro_titulo"));
                 libro.setP_renta(rs.getDouble("p_renta"));

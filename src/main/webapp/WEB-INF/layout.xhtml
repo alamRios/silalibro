@@ -76,7 +76,9 @@
                         <ui:fragment rendered="#{userBean.usuario != null}">
                             <div class="my-1"><a href="#{facesContext.externalContext.requestContextPath}/usuario/cuenta.xhtml" class="btn btn-sm  btn-outline-primary pull-left">Ver mi cuenta <i class="fa fa-user-circle" aria-hidden="true"></i></a></div>
                             <div class="my-1"><h:commandButton value="Cerrar sesión" class="btn btn-sm btn-outline-danger pull-left" action="#{userBean.cerrarSesion}"/></div>
-                            <div class="my-1 text-money">$#{userBean.usuario.cuenta.totalCuenta} MXN</div>
+                            <ui:insert name="saldo">
+                                <div class="my-1 text-money">$#{userBean.usuario.cuenta.totalCuenta} MXN</div>
+                            </ui:insert>
                         </ui:fragment>
                     </ui:insert>
                 </h:form>

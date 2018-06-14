@@ -21,18 +21,18 @@ public class CuentaDAO {
     private final String SQL_CARGO_RENTA = "INSERT INTO movimiento_cuenta "
             + "(movimiento_cuenta_monto, movimiento_cuenta_cargo, movimiento_cuenta_fecha, "
             + "movimiento_cuenta_folioTransaccion, movimiento_cuenta_idusuario) "
-            + "VALUES (?, b'0', NOW(), (SELECT COUNT(*)from movimiento_cuenta), ?);";
+            + "VALUES (?, b'1', NOW(), FLOOR(RAND() * 500) + 5, ?);";
     
     private final String SQL_INSERT_TABLA_RENTA = "INSERT INTO renta"
             + "(renta_idusuario, renta_fechaRegistro, renta_movimientoCuentaid, "
             + "renta_montoTotal) VALUES (?, NOW(), (SELECT idmovimiento_cuenta "
             + "from movimiento_cuenta where movimiento_cuenta_idusuario = ? and "
-            + "movimiento_cuenta_monto = ? and movimiento_cuenta_fecha = NOW() and movimiento_cuenta_cargo = b'0'), ?);";
+            + "movimiento_cuenta_monto = ? and movimiento_cuenta_cargo = b'1'), ?);";
     
     private final String SQL_INSERT_RENTALIBRO = "INSERT INTO rentaventa_libro"
             + "(rentaventa_libro_idlibro, rentaventa_libro_idrentaventa, rentaventa_libro_monto)"
             + "VALUES (?, (SELECT idrenta from renta where renta_idusuario = ? and "
-            + "renta_montoTotal = ? and renta_fechaRegistro = NOW()), ?);";
+            + "renta_montoTotal = ?), ?);";
     
     public CuentaDTO obtenerCuentaPorUsuarioId(int usuarioid) throws Exception{
         CuentaDTO cuenta = new CuentaDTO(); 
@@ -84,7 +84,7 @@ public class CuentaDAO {
             st.setDouble(1, monto);
             st.setInt(2, usuarioid);
             st.executeUpdate();
-            /*
+            
             //insert a renta 
             st = con.prepareStatement(SQL_INSERT_TABLA_RENTA);
             st.setInt(1, usuarioid);
@@ -99,7 +99,8 @@ public class CuentaDAO {
             st.setInt(2, usuarioid);
             st.setDouble(3, monto);
             st.setDouble(4, monto);
-            */
+            st.executeUpdate();
+            
         }catch(Exception ex){
             ex.printStackTrace();
             throw ex; 

@@ -1,0 +1,115 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="../WEB-INF/layout.xhtml">
+    <f:metadata>
+        <f:viewAction action="#{autorBean.cargarAutores}" />
+        <f:viewAction action="#{userBean.validarUsuarioLogueado}" />
+    </f:metadata>
+    <ui:define name="headStyles">
+        <link rel="stylesheet" href="../css/colors.css"/>
+    </ui:define>
+    <ui:define name="header">
+    </ui:define>
+    <ui:define name="jquery"></ui:define>
+    
+    <ui:define name="logo">
+        <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/administrador/index.xhtml">
+            <h:graphicImage width="200" value="../images/SilalibroLogo_blanco.png" />
+        </a>
+    </ui:define>
+     
+    <ui:define name="content">
+        <h1 class="text-center">Registro de libros</h1>
+        <br/>
+        
+        <h:form enctype="multipart/form-data">
+            <div class="row bg-registroLibros">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <p:repeat var="libro" value="#{userBean.librosDisponibles}" 
+                          offset="0" size="#{userBean.librosDisponibles.size()}" 
+                          step="1" varStatus="libroStatus">
+                    <h3 class="text-center my-3">Datos del libro</h3>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="SKU" class="control-label col-sm-2" for="SKU"/>
+                        <p:watermark for="SKU" value="#{libro.sku}" /> 
+                        <h:inputText id="SKU" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.sku}" required="true"/>
+                        <h:message for="SKU"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="TITULO:" class="control-label col-sm-2" for="TITULO"/>
+                        <p:watermark for="TITULO" value="#{libro.titulo}" />
+                        <h:inputText id="TITULO" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.titulo}" required="true"/>
+                        <h:message for="TITULO"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Autor:" class="control-label col-sm-2" for="Autor"/>
+                        <h:selectOneMenu class="form-control col-sm-9 offset-sm-1" 
+                                         id="Autor" value="#{libroBean.libroNuevo.idautor}">
+                            <f:selectItem itemLabel="#{libro.autor.nombreCompleto}"/>
+                            <f:selectItems value="#{autorBean.autores}" 
+                                           var="autor" itemLabel="#{autor.nombreCompleto}" 
+                                           itemValue="#{autor.idautor}"/>
+                        </h:selectOneMenu>
+                        <h:message for="idautor"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="ategoria:" class="control-label col-sm-2" for="categoria"/>
+                        <h:selectOneMenu  id="categoria" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.categoria}" required="true">
+                            <f:selectItem itemLabel="#{libro.categoria}"/>
+                            <f:selectItem itemValue = "Literatura" itemLabel = "Literatura" /> 
+                            <f:selectItem itemValue = "Arte" itemLabel = "Arte" /> 
+                            <f:selectItem itemValue = "Ciencia" itemLabel = "Ciencia" /> 
+                            <f:selectItem itemValue = "Economia" itemLabel = "Economia" /> 
+                            <f:selectItem itemValue = "Tecnologia" itemLabel = "Tecnologia" />
+                            <f:selectItem itemValue = "Matematicas" itemLabel = "Matematicas" />
+                        </h:selectOneMenu>
+                        <h:message for="categoria"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Precio de venta:" class="control-label col-sm-2" for="PrecioVenta"/>
+                        <p:watermark for="PrecioVenta" value="#{libro.p_venta}" /> 
+                        <h:inputText id="PrecioVenta" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.p_venta}" required="true"/>
+                        <h:message for="PrecioVenta"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Precio de renta:" class="control-label col-sm-2" for="PrecioRenta"/>
+                        <p:watermark for="PrecioRenta" value="#{libro.p_renta}" />
+                        <h:inputText id="PrecioRenta" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.p_renta}" required="true"/>
+                        <h:message for="PrecioRenta"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <h:outputLabel value="Rareza:" class="control-label col-sm-2" for="Rareza"/>
+                        <h:selectOneMenu  id="Rareza" class="form-control col-sm-9 offset-sm-1" value="#{libroBean.libroNuevo.rareza}" required="true">
+                            <f:selectItem itemLabel="#{libro.rareza}"/>
+                            <f:selectItem itemValue = "0" itemLabel = "0" /> 
+                            <f:selectItem itemValue = "1" itemLabel = "1" /> 
+                            <f:selectItem itemValue = "2" itemLabel = "2" /> 
+                            <f:selectItem itemValue = "3" itemLabel = "3" /> 
+                            <f:selectItem itemValue = "4" itemLabel = "4" />
+                            <f:selectItem itemValue = "5" itemLabel = "5" />
+                        </h:selectOneMenu>
+                        <h:message for="Rareza"/>
+                    </div>
+                    <div class="form-group form-inline col-md-12">
+                        <label for="Portada"> Portada:  </label>
+                        <h:inputFile class="form-control" id="Portada" value="#{libroBean.libroNuevo.librocol}"></h:inputFile>
+                    </div> 
+                    </p:repeat>
+                </div>
+
+            </div>
+            <div class="clearfix visible-md-block"></div>
+
+            <br/>
+            <div class="row">
+                <h:commandButton class="btn btn-lg btn-success btn-block"
+                                 actionListener="#{libroBean.registrarLibro}"
+                                 value="Registrar Libro"></h:commandButton>
+            </div>
+        </h:form>
+    </ui:define>
+    <ui:define name="footer"></ui:define>
+</ui:composition>
